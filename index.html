@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interlock Labs</title>
+  <meta name="description" content="Healthcare AI has a liability problem, not a technology problem. Interlock Labs is building independent behavioral verification for healthcare AI.">
+  <meta property="og:title" content="Interlock Labs">
+  <meta property="og:description" content="Healthcare AI has a liability problem, not a technology problem.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://interlocklabs.ai/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Interlock Labs">
+  <meta name="twitter:description" content="Healthcare AI has a liability problem, not a technology problem.">
+  <meta name="twitter:image" content="https://interlocklabs.ai/og-image.png">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230a0a0a'/><rect x='4' y='4' width='10' height='10' rx='1' fill='%23f8f6f2'/><rect x='18' y='4' width='10' height='10' rx='1' fill='%230a0a0a'/><rect x='4' y='18' width='10' height='10' rx='1' fill='%230a0a0a'/><rect x='18' y='18' width='10' height='10' rx='1' fill='%23f8f6f2'/></svg>" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0a0a0a;
+      --paper: #f8f6f2;
+      --accent: #1a5c3a;
+      --muted: #555555;
+      --border: #d4d0c8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 1000;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .nav {
+      padding: 1.5rem 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 0s forwards;
+    }
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .nav-logo svg {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+    }
+    .nav-wordmark {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 3rem 3rem;
+    }
+    .content {
+      text-align: center;
+      max-width: 720px;
+    }
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 0.1s forwards;
+    }
+    .headline {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      line-height: 1.12;
+      margin-bottom: 1.5rem;
+      color: var(--ink);
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 0.25s forwards;
+    }
+    .subline {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 2.25rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 0.45s forwards;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.75rem;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.3s ease, transform 0.2s ease;
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 0.6s forwards;
+    }
+    .cta:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+    }
+    .divider {
+      width: 32px;
+      height: 1px;
+      background: var(--border);
+      margin: 1.5rem auto;
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 0.75s forwards;
+    }
+    .footer-links {
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 0.85s forwards;
+    }
+    .footer-links a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .footer-links a:hover {
+      color: #0a66c2;
+    }
+    .footer-links svg {
+      width: 14px;
+      height: 14px;
+      transition: color 0.2s;
+    }
+    @media (max-width: 600px) {
+      .nav { padding: 1.25rem 1.5rem; }
+      .main { padding: 0 1.5rem 2rem; }
+      .headline { font-size: 1.8rem; }
+      .headline br { display: none; }
+      .subline { font-size: 1rem; }
+      .cta { padding: 1rem 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="/" class="nav-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+        <rect x="4.41" y="4.41" width="191.18" height="191.18" rx="23.53" fill="#0a0a0a" stroke="#f8f6f2" stroke-width="8.82"/>
+        <rect x="29.41" y="29.41" width="64.71" height="64.71" rx="5.88" fill="#f8f6f2"/>
+        <rect x="105.88" y="29.41" width="64.71" height="64.71" rx="5.88" fill="none" stroke="#f8f6f2" stroke-width="5.88"/>
+        <rect x="29.41" y="105.88" width="64.71" height="64.71" rx="5.88" fill="none" stroke="#f8f6f2" stroke-width="5.88"/>
+        <rect x="105.88" y="105.88" width="64.71" height="64.71" rx="5.88" fill="#f8f6f2"/>
+      </svg>
+      <span class="nav-wordmark">INTERLOCK LABS</span>
+    </a>
+  </nav>
+
+  <div class="main">
+    <div class="content">
+      <div class="section-label">Independent behavioral verification for healthcare AI</div>
+      <h1 class="headline">Healthcare AI has a liability problem,<br>not a technology problem.</h1>
+      <p class="subline">The AI works. Insurers are excluding it from coverage. Legal won't approve deployment. Independent behavioral verification shifts the liability, unlocks insurance, and makes healthcare AI deployable.</p>
+      <!--email_off--><a href="mailto:mesh@interlocklabs.ai" class="cta">Get in touch &rarr;</a><!--/email_off-->
+      <div class="divider"></div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/meshal/recent-activity/all/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          Follow our thinking
+        </a>
+            </div>
+    </div>
+  </div>
+
+</body>
+</html>

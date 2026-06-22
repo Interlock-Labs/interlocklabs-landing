@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interlock Labs | Cartridge Architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0a0a0a;
+      --paper: #f8f6f2;
+      --muted: #6b6b6b;
+      --border: #d4d0c8;
+      --card-bg: #ffffff;
+      --subtle-bg: #f0ede6;
+      --clinical: #8b2635;
+      --behavioral: #6b4c9a;
+      --cultural: #b8860b;
+      --regulatory: #2563eb;
+      --comms: #0d7377;
+      --safe: #1a5c3a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 1000;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .logo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600; font-size: 1.05rem;
+      letter-spacing: -0.02em;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .logo-mark {
+      width: 30px; height: 30px;
+      border: 1.5px solid var(--ink); border-radius: 3px;
+      display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+      gap: 2px; padding: 4px;
+    }
+    .logo-mark span { background: var(--ink); border-radius: 1px; }
+    .logo-mark span:nth-child(2), .logo-mark span:nth-child(3) { background: transparent; border: 1px solid var(--ink); }
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--muted);
+    }
+
+    /* Header */
+    .header {
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; }
+
+    /* Title */
+    .page-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2.2rem; font-weight: 400;
+      margin-bottom: 0.3rem;
+      line-height: 1.2;
+    }
+    .page-sub {
+      font-size: 1rem; color: var(--muted);
+      max-width: 600px;
+    }
+
+    /* Layer sections */
+    .layer {
+      margin-bottom: 2rem;
+    }
+    .layer-header {
+      display: flex; align-items: baseline; gap: 1rem;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .layer-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.35rem;
+    }
+    .layer-desc {
+      font-size: 0.85rem; color: var(--muted);
+    }
+
+    /* Cartridge cards */
+    .cartridge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 0.75rem;
+    }
+    .cartridge-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+      transition: all 0.25s;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+    .cartridge-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+    }
+    .cartridge-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    .cartridge-card .card-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      margin-bottom: 0.5rem;
+    }
+    .cartridge-card .card-name {
+      font-weight: 600; font-size: 0.92rem;
+      margin-bottom: 0.2rem;
+    }
+    .cartridge-card .card-source {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem; color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .cartridge-card .card-desc {
+      font-size: 0.82rem; color: var(--muted);
+      line-height: 1.5;
+    }
+    .cartridge-card .card-examples {
+      margin-top: 0.5rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem; color: var(--muted);
+      opacity: 0.7;
+    }
+
+    /* Color themes */
+    .theme-clinical::before { background: var(--clinical); }
+    .theme-clinical .card-dot { background: var(--clinical); }
+    .theme-clinical .card-name { color: var(--clinical); }
+
+    .theme-behavioral::before { background: var(--behavioral); }
+    .theme-behavioral .card-dot { background: var(--behavioral); }
+    .theme-behavioral .card-name { color: var(--behavioral); }
+
+    .theme-cultural::before { background: var(--cultural); }
+    .theme-cultural .card-dot { background: var(--cultural); }
+    .theme-cultural .card-name { color: var(--cultural); }
+
+    .theme-regulatory::before { background: var(--regulatory); }
+    .theme-regulatory .card-dot { background: var(--regulatory); }
+    .theme-regulatory .card-name { color: var(--regulatory); }
+
+    .theme-comms::before { background: var(--comms); }
+    .theme-comms .card-dot { background: var(--comms); }
+    .theme-comms .card-name { color: var(--comms); }
+
+    .theme-domain::before { background: var(--ink); }
+    .theme-domain .card-dot { background: var(--ink); }
+    .theme-domain .card-name { color: var(--ink); }
+
+    .theme-context::before { background: var(--safe); }
+    .theme-context .card-dot { background: var(--safe); }
+    .theme-context .card-name { color: var(--safe); }
+
+    /* Customer stacks */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+    }
+    .stack-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.1rem 1.25rem;
+      transition: all 0.25s;
+    }
+    .stack-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .stack-name {
+      font-weight: 600; font-size: 0.95rem;
+      margin-bottom: 0.15rem;
+    }
+    .stack-type {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem; color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .stack-concern {
+      font-size: 0.82rem; color: var(--muted);
+      margin-bottom: 0.6rem;
+      font-style: italic;
+    }
+    .stack-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .stack-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem; font-weight: 500;
+      padding: 0.2rem 0.5rem; border-radius: 4px;
+      border: 1px solid;
+    }
+    .stack-tag-clinical { color: var(--clinical); border-color: rgba(139,38,53,0.25); background: rgba(139,38,53,0.05); }
+    .stack-tag-behavioral { color: var(--behavioral); border-color: rgba(107,76,154,0.25); background: rgba(107,76,154,0.05); }
+    .stack-tag-cultural { color: var(--cultural); border-color: rgba(184,134,11,0.25); background: rgba(184,134,11,0.05); }
+    .stack-tag-regulatory { color: var(--regulatory); border-color: rgba(37,99,235,0.25); background: rgba(37,99,235,0.05); }
+    .stack-tag-comms { color: var(--comms); border-color: rgba(13,115,119,0.25); background: rgba(13,115,119,0.05); }
+    .stack-tag-domain { color: var(--ink); border-color: rgba(10,10,10,0.2); background: rgba(10,10,10,0.04); }
+    .stack-tag-context { color: var(--safe); border-color: rgba(26,92,58,0.25); background: rgba(26,92,58,0.05); }
+
+    /* Flywheel */
+    .flywheel-section {
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+      margin: 2rem 0;
+    }
+    .flywheel-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.4rem; margin-bottom: 1rem;
+    }
+    .flywheel-steps {
+      display: flex; align-items: center;
+      flex-wrap: wrap; gap: 0.5rem;
+      justify-content: center;
+    }
+    .flywheel-step {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      text-align: center;
+      min-width: 150px;
+    }
+    .flywheel-step-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem; text-transform: uppercase;
+      letter-spacing: 0.08em; opacity: 0.5;
+      margin-bottom: 0.2rem;
+    }
+    .flywheel-step-text { font-size: 0.88rem; font-weight: 500; }
+    .flywheel-arrow {
+      font-size: 1.2rem; opacity: 0.3;
+      flex-shrink: 0;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 2rem; padding: 1.5rem 0;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-text {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.66rem; color: var(--muted);
+      text-align: right; line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .cartridge-grid { grid-template-columns: 1fr; }
+      .stack-grid { grid-template-columns: 1fr; }
+      .flywheel-steps { flex-direction: column; }
+      .flywheel-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="container header-inner">
+      <div class="logo">
+        <div class="logo-mark"><span></span><span></span><span></span><span></span></div>
+        INTERLOCK LABS
+      </div>
+      <span class="section-label">Cartridge Architecture · Internal</span>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Title -->
+    <div style="margin-bottom: 2.5rem;">
+      <div class="page-title">Verification Cartridge Architecture</div>
+      <div class="page-sub">How expert-validated verification modules compose into customer-specific safety stacks. Each cartridge encodes the judgment of a specific discipline — not rules an engineer wrote.</div>
+    </div>
+
+    <!-- LAYER 1 -->
+    <div class="layer">
+      <div class="layer-header">
+        <div class="layer-title">Layer 1: Expert Discipline Cartridges</div>
+        <div class="layer-desc">Horizontal — apply across conditions, contexts, and customers</div>
+      </div>
+      <div class="cartridge-grid">
+        <div class="cartridge-card theme-clinical">
+          <div class="card-dot"></div>
+          <div class="card-name">Clinical Safety</div>
+          <div class="card-source">Oncology specialists</div>
+          <div class="card-desc">Drug interactions, contraindications, dosage boundaries, scope-of-practice violations. The "is this medically dangerous" lens.</div>
+          <div class="card-examples">Written by: Physicians</div>
+        </div>
+        <div class="cartridge-card theme-behavioral">
+          <div class="card-dot"></div>
+          <div class="card-name">Behavioral Psychology</div>
+          <div class="card-source">Psycho-oncology specialists</div>
+          <div class="card-desc">Emotional framing, crisis detection, prognostic delivery, therapeutic alliance rupture, treatment disengagement risk.</div>
+          <div class="card-examples">Written by: Clinical psychologists</div>
+        </div>
+        <div class="cartridge-card theme-comms">
+          <div class="card-dot"></div>
+          <div class="card-name">Patient Communication</div>
+          <div class="card-source">Health literacy specialists</div>
+          <div class="card-desc">Reading level, shared decision-making, informed consent framing, teach-back methodology. Medical concepts in human language.</div>
+          <div class="card-examples">Written by: Health communication researchers</div>
+        </div>
+        <div class="cartridge-card theme-cultural">
+          <div class="card-dot"></div>
+          <div class="card-name">Cultural Competency</div>
+          <div class="card-source">Health equity specialists</div>
+          <div class="card-desc">Religious dietary restrictions, family decision-making norms, prognosis disclosure practices, gender-affirming care communication.</div>
+          <div class="card-examples">Written by: Medical anthropologists, chaplains</div>
+        </div>
+        <div class="cartridge-card theme-regulatory">
+          <div class="card-dot"></div>
+          <div class="card-name">Regulatory Compliance</div>
+          <div class="card-source">Health law · Multi-state</div>
+          <div class="card-desc">HIPAA boundaries, FTC wellness claims, FDA SaMD thresholds, state scope-of-practice rules. Clinically fine ≠ legally compliant.</div>
+          <div class="card-examples">Written by: Health law attorneys, compliance officers</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAYER 2 -->
+    <div class="layer">
+      <div class="layer-header">
+        <div class="layer-title">Layer 2: Domain-Specific Cartridges</div>
+        <div class="layer-desc">Vertical — deep expertise within a medical specialty</div>
+      </div>
+      <div class="cartridge-grid">
+        <div class="cartridge-card theme-domain">
+          <div class="card-dot"></div>
+          <div class="card-name">Oncology</div>
+          <div class="card-source">Pilot · Phase 1</div>
+          <div class="card-desc">Staging communication, treatment resistance framing, end-of-life boundaries, clinical trial eligibility language, survivorship transition.</div>
+        </div>
+        <div class="cartridge-card theme-domain">
+          <div class="card-dot"></div>
+          <div class="card-name">Cardiology</div>
+          <div class="card-source">Expansion target</div>
+          <div class="card-desc">Chest pain triage language, anticoagulation boundaries, device alarm protocols, cardiac rehab motivation vs. overexertion risk.</div>
+        </div>
+        <div class="cartridge-card theme-domain">
+          <div class="card-dot"></div>
+          <div class="card-name">Mental Health</div>
+          <div class="card-source">Expansion target</div>
+          <div class="card-desc">Suicide risk language, medication adherence framing, therapeutic boundary maintenance, crisis escalation detection.</div>
+        </div>
+        <div class="cartridge-card theme-domain">
+          <div class="card-dot"></div>
+          <div class="card-name">Chronic Disease</div>
+          <div class="card-source">Expansion target</div>
+          <div class="card-desc">Self-management coaching boundaries, insulin adjustment language, dietary guidance crossing clinical and cultural lines.</div>
+        </div>
+        <div class="cartridge-card theme-domain">
+          <div class="card-dot"></div>
+          <div class="card-name">Pediatrics</div>
+          <div class="card-source">Expansion target</div>
+          <div class="card-desc">Age-appropriate explanation, parental vs. minor communication, developmental milestone anxiety, vaccine hesitancy navigation.</div>
+        </div>
+        <div class="cartridge-card theme-domain">
+          <div class="card-dot"></div>
+          <div class="card-name">Reproductive Health</div>
+          <div class="card-source">Expansion target</div>
+          <div class="card-desc">State-by-state legal variation, fertility treatment framing, pregnancy loss communication, postpartum mental health screening.</div>
+        </div>
+        <div class="cartridge-card theme-domain">
+          <div class="card-dot"></div>
+          <div class="card-name">Geriatrics</div>
+          <div class="card-source">Expansion target</div>
+          <div class="card-desc">Cognitive decline sensitivity, caregiver communication, polypharmacy awareness, end-of-life planning language, capacity assessment.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAYER 3 -->
+    <div class="layer">
+      <div class="layer-header">
+        <div class="layer-title">Layer 3: Population & Context Cartridges</div>
+        <div class="layer-desc">Contextual — adapts verification based on who and where</div>
+      </div>
+      <div class="cartridge-grid">
+        <div class="cartridge-card theme-context">
+          <div class="card-dot"></div>
+          <div class="card-name">Pediatric Patient</div>
+          <div class="card-source">Context modifier</div>
+          <div class="card-desc">Everything changes when the user is under 18. Consent frameworks, mandatory reporting triggers, parental involvement requirements.</div>
+        </div>
+        <div class="cartridge-card theme-context">
+          <div class="card-dot"></div>
+          <div class="card-name">Caregiver Mode</div>
+          <div class="card-source">Context modifier</div>
+          <div class="card-desc">The person asking isn't the patient. Different information needs, emotional state, and legal standing. "My mother was just diagnosed…"</div>
+        </div>
+        <div class="cartridge-card theme-context">
+          <div class="card-dot"></div>
+          <div class="card-name">Clinical Trial</div>
+          <div class="card-source">Context modifier</div>
+          <div class="card-desc">Informed consent language, equipoise communication, the boundary between educating about a trial and recruiting for one.</div>
+        </div>
+        <div class="cartridge-card theme-context">
+          <div class="card-dot"></div>
+          <div class="card-name">Post-Discharge</div>
+          <div class="card-source">Context modifier</div>
+          <div class="card-desc">The 48-hour window after leaving a hospital. Medication reconciliation boundaries, red-flag symptoms, when to say "call 911."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAYER 4 -->
+    <div class="layer">
+      <div class="layer-header">
+        <div class="layer-title">Layer 4: Customer-Specific Stacks</div>
+        <div class="layer-desc">Composed — each customer gets a configured verification stack matching their risk profile</div>
+      </div>
+      <div class="stack-grid">
+        <div class="stack-card">
+          <div class="stack-name">Oncology Support Platform</div>
+          <div class="stack-type">Research pilot</div>
+          <div class="stack-concern">Full stack — highest stakes, deepest verification depth</div>
+          <div class="stack-tags">
+            <span class="stack-tag stack-tag-clinical">Clinical Safety</span>
+            <span class="stack-tag stack-tag-behavioral">Behavioral Psych</span>
+            <span class="stack-tag stack-tag-cultural">Cultural</span>
+            <span class="stack-tag stack-tag-comms">Patient Comms</span>
+            <span class="stack-tag stack-tag-domain">Oncology</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-name">Telehealth Wellness</div>
+          <div class="stack-type">Ro, Hims, Cerebral</div>
+          <div class="stack-concern">Core concern: when does coaching cross into practicing medicine?</div>
+          <div class="stack-tags">
+            <span class="stack-tag stack-tag-clinical">Clinical Safety</span>
+            <span class="stack-tag stack-tag-behavioral">Behavioral Psych</span>
+            <span class="stack-tag stack-tag-regulatory">Regulatory</span>
+            <span class="stack-tag stack-tag-domain">Chronic Disease</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-name">Wearable Fitness</div>
+          <div class="stack-type">Whoop, Oura, Garmin</div>
+          <div class="stack-concern">Core concern: when does biometric interpretation become clinical assessment?</div>
+          <div class="stack-tags">
+            <span class="stack-tag stack-tag-clinical">Clinical Safety</span>
+            <span class="stack-tag stack-tag-behavioral">Behavioral Psych</span>
+            <span class="stack-tag stack-tag-regulatory">Regulatory</span>
+            <span class="stack-tag stack-tag-domain">Cardiology</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-name">Mental Health App</div>
+          <div class="stack-type">Woebot, Wysa, Talkspace</div>
+          <div class="stack-concern">Core concern: therapeutic boundaries and suicide risk detection</div>
+          <div class="stack-tags">
+            <span class="stack-tag stack-tag-clinical">Clinical Safety</span>
+            <span class="stack-tag stack-tag-behavioral">Behavioral Psych</span>
+            <span class="stack-tag stack-tag-domain">Mental Health</span>
+            <span class="stack-tag stack-tag-context">Crisis Detection</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-name">Health Plan Portal</div>
+          <div class="stack-type">UHC, Aetna, Cigna member AI</div>
+          <div class="stack-concern">Core concern: broad population, low clinical depth, high regulatory exposure</div>
+          <div class="stack-tags">
+            <span class="stack-tag stack-tag-clinical">Clinical Safety</span>
+            <span class="stack-tag stack-tag-regulatory">Regulatory</span>
+            <span class="stack-tag stack-tag-comms">Patient Comms</span>
+            <span class="stack-tag stack-tag-cultural">Cultural</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-name">Chronic Disease Mgmt</div>
+          <div class="stack-type">Livongo, Omada, Virta</div>
+          <div class="stack-concern">Core concern: self-management coaching that stays within safe boundaries</div>
+          <div class="stack-tags">
+            <span class="stack-tag stack-tag-clinical">Clinical Safety</span>
+            <span class="stack-tag stack-tag-behavioral">Behavioral Psych</span>
+            <span class="stack-tag stack-tag-domain">Chronic Disease</span>
+            <span class="stack-tag stack-tag-comms">Patient Comms</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLYWHEEL -->
+    <div class="flywheel-section">
+      <div class="flywheel-title">Data Flywheel: Every Cartridge Gets Better With Use</div>
+      <div class="flywheel-steps">
+        <div class="flywheel-step">
+          <div class="flywheel-step-label">Step 1</div>
+          <div class="flywheel-step-text">Customer deploys<br/>verification stack</div>
+        </div>
+        <div class="flywheel-arrow">→</div>
+        <div class="flywheel-step">
+          <div class="flywheel-step-label">Step 2</div>
+          <div class="flywheel-step-text">Verification events<br/>generate labeled data</div>
+        </div>
+        <div class="flywheel-arrow">→</div>
+        <div class="flywheel-step">
+          <div class="flywheel-step-label">Step 3</div>
+          <div class="flywheel-step-text">Labeled data refines<br/>cartridge accuracy</div>
+        </div>
+        <div class="flywheel-arrow">→</div>
+        <div class="flywheel-step">
+          <div class="flywheel-step-label">Step 4</div>
+          <div class="flywheel-step-text">Improved cartridges<br/>serve all customers</div>
+        </div>
+        <div class="flywheel-arrow">→</div>
+        <div class="flywheel-step">
+          <div class="flywheel-step-label">Step 5</div>
+          <div class="flywheel-step-text">Audit data enables<br/>insurance pricing</div>
+        </div>
+        <div class="flywheel-arrow" style="opacity: 0.15;">↻</div>
+      </div>
+      <div style="text-align: center; margin-top: 1.25rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; opacity: 0.5;">
+        When a telehealth company's users trigger Clinical Safety 10,000 times, those events refine the cartridge for every customer using it.
+      </div>
+    </div>
+
+    <!-- BUSINESS MODEL -->
+    <div class="layer">
+      <div class="layer-header">
+        <div class="layer-title">How Layers Map to Business Model</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.75rem;">
+        <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.3rem;">Layer 1 — Disciplines</div>
+          <div style="font-weight: 600; margin-bottom: 0.3rem;">The Platform</div>
+          <div style="font-size: 0.82rem; color: var(--muted);">Every customer needs some combination. Built once with academic research partners, refined continuously from verification data. This is the moat — competitors need their own IRB partnerships and expert panels to replicate.</div>
+        </div>
+        <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.3rem;">Layer 2 — Domains</div>
+          <div style="font-weight: 600; margin-bottom: 0.3rem;">The Expansion Wedge</div>
+          <div style="font-size: 0.82rem; color: var(--muted);">Each new specialty expands TAM. Oncology first, then adjacent specialties through research partnerships. Every new domain cartridge is a new selling motion.</div>
+        </div>
+        <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.3rem;">Layer 3 — Context</div>
+          <div style="font-weight: 600; margin-bottom: 0.3rem;">The Upsell</div>
+          <div style="font-size: 0.82rem; color: var(--muted);">Customer starts with base stack, adds context cartridges as their product matures. "We're launching a caregiver feature" — they need the caregiver cartridge.</div>
+        </div>
+        <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.3rem;">Layer 4 — Stacks</div>
+          <div style="font-weight: 600; margin-bottom: 0.3rem;">The Pricing Lever</div>
+          <div style="font-size: 0.82rem; color: var(--muted);">Each customer's stack is configured to their risk profile. Switching costs are high because the configuration encodes their specific exposure.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="logo" style="font-size: 0.82rem; opacity: 0.45;">
+        <div class="logo-mark" style="width: 22px; height: 22px; padding: 3px; border-width: 1px;"><span></span><span></span><span></span><span></span></div>
+        INTERLOCK LABS
+      </div>
+      <div class="footer-text">
+        Third-party behavioral verification for healthcare AI<br/>
+        <span style="opacity: 0.6;">interlocklabs.ai · Confidential</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
