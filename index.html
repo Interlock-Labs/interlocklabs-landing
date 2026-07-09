@@ -25,17 +25,17 @@
       --ink: #0a0a0a;
       --paper: #f8f6f2;
       --accent: #1a5c3a;
+      --body-text: #2a2a2a;
       --muted: #555555;
       --border: #d4d0c8;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--paper);
       color: var(--ink);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      line-height: 1.6;
     }
     body::before {
       content: '';
@@ -46,14 +46,23 @@
       pointer-events: none;
       z-index: 1000;
     }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
+    .wrap {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
     }
+    .mono {
+      font-family: 'IBM Plex Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    /* ---------- nav ---------- */
     .nav {
-      padding: 1.5rem 3rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0s forwards;
+      padding: 1.75rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
     .nav-logo {
       display: inline-flex;
@@ -62,63 +71,59 @@
       text-decoration: none;
       color: var(--ink);
     }
-    .nav-logo svg {
-      width: 34px;
-      height: 34px;
-      flex-shrink: 0;
-    }
+    .nav-logo svg { width: 34px; height: 34px; flex-shrink: 0; }
     .nav-wordmark {
       font-family: 'IBM Plex Mono', monospace;
       font-weight: 600;
       font-size: 1rem;
       letter-spacing: -0.02em;
     }
-    .main {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 3rem 3rem;
-    }
-    .content {
-      text-align: center;
-      max-width: 720px;
-    }
-    .section-label {
+    .nav-cta {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0.1s forwards;
+      letter-spacing: 0.1em;
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--ink);
+      border-radius: 4px;
+      padding: 0.55rem 1.1rem;
+      transition: background 0.25s ease, color 0.25s ease;
     }
-    .headline {
+    .nav-cta:hover { background: var(--ink); color: var(--paper); }
+
+    /* ---------- hero ---------- */
+    .hero {
+      padding: 7.5rem 0 6.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+    .hero h1 {
       font-family: 'Instrument Serif', serif;
       font-weight: 400;
-      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
-      line-height: 1.12;
-      margin-bottom: 1.5rem;
-      color: var(--ink);
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0.25s forwards;
+      font-size: clamp(2.6rem, 6vw, 4.6rem);
+      line-height: 1.08;
+      max-width: 17ch;
+      margin-bottom: 2rem;
     }
-    .subline {
-      font-size: 1.1rem;
+    .hero-sub {
+      font-size: 1.15rem;
       line-height: 1.7;
       color: var(--muted);
-      max-width: 540px;
-      margin: 0 auto 2.25rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0.45s forwards;
+      max-width: 56ch;
+      margin-bottom: 2.75rem;
     }
     .cta {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.85rem 1.75rem;
+      padding: 0.9rem 1.8rem;
       background: var(--ink);
       color: var(--paper);
       font-family: 'IBM Plex Mono', monospace;
@@ -127,85 +132,402 @@
       text-decoration: none;
       border-radius: 4px;
       transition: background 0.3s ease, transform 0.2s ease;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0.6s forwards;
     }
-    .cta:hover {
-      background: var(--accent);
-      transform: translateY(-2px);
+    .cta:hover { background: var(--accent); transform: translateY(-2px); }
+
+    /* ---------- sections ---------- */
+    .section {
+      padding: 6rem 0;
+      border-bottom: 1px solid var(--border);
     }
-    .divider {
-      width: 32px;
-      height: 1px;
-      background: var(--border);
-      margin: 1.5rem auto;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0.75s forwards;
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      gap: 1.25rem;
+      margin-bottom: 1.75rem;
     }
-    .footer-links {
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0.85s forwards;
+    .sec-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
     }
-    .footer-links a {
+    .sec-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    .section h2 {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+      line-height: 1.15;
+      max-width: 24ch;
+      margin-bottom: 1.5rem;
+    }
+    .section p {
+      font-size: 1.05rem;
+      color: var(--body-text);
+      max-width: 62ch;
+      margin-bottom: 1.25rem;
+    }
+    .section p strong { font-weight: 600; }
+
+    /* ---------- stats ---------- */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-top: 3rem;
+      background: rgba(255,255,255,0.35);
+    }
+    .stat {
+      padding: 2rem 1.75rem 1.75rem;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 3.4rem;
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+    .stat-desc {
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+    .stats-source {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+
+    /* ---------- verification spec block ---------- */
+    .spec {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.35);
+      margin-top: 3rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      overflow-x: auto;
+    }
+    .spec-bar {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.7rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .spec-body { padding: 1.5rem; white-space: pre; color: var(--body-text); }
+    .spec-body .k { color: var(--muted); }
+    .spec-body .flag { color: var(--accent); font-weight: 600; }
+
+    /* ---------- lenses ---------- */
+    .lenses {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+    .lens-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding-top: 1rem;
+      border-top: 2px solid var(--ink);
+      margin-bottom: 0.6rem;
+    }
+    .lens-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.6; }
+
+    /* ---------- chain (substrate → policy) ---------- */
+    .chain {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      margin-top: 3rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.35);
+      overflow-x: auto;
+    }
+    .chain-step {
+      flex: 1;
+      min-width: 150px;
+      padding: 1.75rem 1.5rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .chain-step:last-child { border-right: none; }
+    .chain-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.65rem;
+      display: block;
+    }
+    .chain-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.35rem;
+      margin-bottom: 0.4rem;
+    }
+    .chain-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.55; }
+
+    /* ---------- audience ---------- */
+    .quiet-line {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+      border-left: 2px solid var(--accent);
+      padding-left: 1.25rem;
+      margin-top: 2.5rem;
+      max-width: 60ch;
+      line-height: 1.8;
+    }
+
+    /* ---------- final cta ---------- */
+    .final {
+      padding: 7rem 0;
+      text-align: center;
+    }
+    .final h2 {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+    .final p {
+      color: var(--muted);
+      max-width: 48ch;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* ---------- footer ---------- */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 2.25rem 0 2.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-note {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .footer a {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--muted);
       text-decoration: none;
-      transition: color 0.2s;
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-    }
-    .footer-links a:hover {
-      color: #0a66c2;
-    }
-    .footer-links svg {
-      width: 14px;
-      height: 14px;
       transition: color 0.2s;
     }
-    @media (max-width: 600px) {
-      .nav { padding: 1.25rem 1.5rem; }
-      .main { padding: 0 1.5rem 2rem; }
-      .headline { font-size: 1.8rem; }
-      .headline br { display: none; }
-      .subline { font-size: 1rem; }
-      .cta { padding: 1rem 1.75rem; }
+    .footer a:hover { color: #0a66c2; }
+    .footer svg { width: 14px; height: 14px; }
+
+    /* ---------- reveal animation ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 760px) {
+      .wrap { padding: 0 1.4rem; }
+      .hero { padding: 4.5rem 0 4rem; }
+      .section { padding: 4rem 0; }
+      .stats, .lenses { grid-template-columns: 1fr; }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat:last-child { border-bottom: none; }
+      .chain { flex-direction: column; }
+      .chain-step { border-right: none; border-bottom: 1px solid var(--border); }
+      .chain-step:last-child { border-bottom: none; }
     }
   </style>
 </head>
 <body>
 
-  <nav class="nav">
-    <a href="/" class="nav-logo">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-        <rect x="4.41" y="4.41" width="191.18" height="191.18" rx="23.53" fill="#0a0a0a" stroke="#f8f6f2" stroke-width="8.82"/>
-        <rect x="29.41" y="29.41" width="64.71" height="64.71" rx="5.88" fill="#f8f6f2"/>
-        <rect x="105.88" y="29.41" width="64.71" height="64.71" rx="5.88" fill="none" stroke="#f8f6f2" stroke-width="5.88"/>
-        <rect x="29.41" y="105.88" width="64.71" height="64.71" rx="5.88" fill="none" stroke="#f8f6f2" stroke-width="5.88"/>
-        <rect x="105.88" y="105.88" width="64.71" height="64.71" rx="5.88" fill="#f8f6f2"/>
-      </svg>
-      <span class="nav-wordmark">INTERLOCK LABS</span>
-    </a>
-  </nav>
-
-  <div class="main">
-    <div class="content">
-      <div class="section-label">The verification and underwriting layer for healthcare AI</div>
-      <h1 class="headline">Healthcare AI has a liability problem,<br>not a technology problem.</h1>
-      <p class="subline">The AI works. Deployment stalls because no one can carry the liability. Interlock verifies clinical AI against deterministic clinical, behavioral, and cultural rules, and turns that evidence into the substrate insurance is written on. Verification shifts the liability and makes healthcare AI deployable.</p>
-      <!--email_off--><a href="mailto:mesh@interlocklabs.ai" class="cta">Get in touch &rarr;</a><!--/email_off-->
-      <div class="divider"></div>
-      <div class="footer-links">
-        <a href="https://www.linkedin.com/in/meshal/recent-activity/all/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          Follow our thinking
-        </a>
-            </div>
-    </div>
+  <div class="wrap">
+    <nav class="nav reveal in">
+      <a href="/" class="nav-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+          <rect x="4.41" y="4.41" width="191.18" height="191.18" rx="23.53" fill="#0a0a0a" stroke="#f8f6f2" stroke-width="8.82"/>
+          <rect x="29.41" y="29.41" width="64.71" height="64.71" rx="5.88" fill="#f8f6f2"/>
+          <rect x="105.88" y="29.41" width="64.71" height="64.71" rx="5.88" fill="none" stroke="#f8f6f2" stroke-width="5.88"/>
+          <rect x="29.41" y="105.88" width="64.71" height="64.71" rx="5.88" fill="none" stroke="#f8f6f2" stroke-width="5.88"/>
+          <rect x="105.88" y="105.88" width="64.71" height="64.71" rx="5.88" fill="#f8f6f2"/>
+        </svg>
+        <span class="nav-wordmark">INTERLOCK LABS</span>
+      </a>
+      <!--email_off--><a href="mailto:mesh@interlocklabs.ai" class="nav-cta">Get in touch</a><!--/email_off-->
+    </nav>
   </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-label mono reveal in">The verification and underwriting layer for healthcare AI</div>
+      <h1 class="reveal in">Healthcare AI has a liability problem, not a technology problem.</h1>
+      <p class="hero-sub reveal in">The AI works. Deployment stalls because no one can carry the liability. Interlock verifies clinical AI against deterministic clinical, behavioral, and cultural rules, and turns that evidence into the substrate insurance is written on.</p>
+      <!--email_off--><a href="mailto:mesh@interlocklabs.ai" class="cta reveal in">Get in touch &rarr;</a><!--/email_off-->
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-num">01</span>
+        <span class="sec-label mono">The deployment gap</span>
+      </div>
+      <h2 class="reveal">The model passed the demo. Legal still says no.</h2>
+      <p class="reveal">Clinical AI is not blocked by capability. It is blocked by unpriced risk. Insurers exclude AI from coverage because no actuarial data exists on how these systems fail. Risk officers cannot quantify what a model will do across a million patient interactions. General counsel will not sign off on a liability nobody can measure.</p>
+      <p class="reveal">The failure modes are real. When we ran frontier models against a standard blood panel with mostly normal values, the results looked like this:</p>
+      <div class="stats reveal">
+        <div class="stat">
+          <div class="stat-num">78</div>
+          <div class="stat-desc">errors across frontier models reviewing one standard lab panel</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">25</div>
+          <div class="stat-desc">rated high severity on clinical review</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">24+</div>
+          <div class="stat-desc">diseases named from mostly normal values. Physicians reviewing the same panel named zero.</div>
+        </div>
+      </div>
+      <div class="stats-source reveal">Interlock lab-review research, 2026</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-num">02</span>
+        <span class="sec-label mono">How verification works</span>
+      </div>
+      <h2 class="reveal">Deterministic rules. Not another model.</h2>
+      <p class="reveal">A <strong>cartridge</strong> encodes expert clinical judgment for one workflow as deterministic rules: range comparisons, string matches, pattern checks. There is no LLM in the verification layer. The same input always produces the same flags, which is what makes the output usable as evidence.</p>
+      <p class="reveal">Verification runs before release and again at runtime, and every interaction produces an audit trail with patient data redacted. Interlock measures behavior. It does not certify models, and it does not replace them.</p>
+      <div class="spec reveal">
+        <div class="spec-bar"><span>Verification check &middot; illustrative</span><span>cartridge: lab-review</span></div>
+        <div class="spec-body"><span class="k">input</span>     vitamin D 34 ng/mL (within reference range)
+<span class="k">output</span>    model response names "vitamin D deficiency"
+<span class="k">rule</span>      range_contradiction: claim vs. reference interval
+<span class="flag">flag</span>      CONTRADICTION &middot; severity HIGH &middot; deterministic &middot; audit trail written</div>
+      </div>
+      <div class="lenses">
+        <div class="reveal">
+          <div class="lens-title">Clinical</div>
+          <div class="lens-desc">Does the output contradict the artifact in front of it: reference ranges, medications, the patient record?</div>
+        </div>
+        <div class="reveal">
+          <div class="lens-title">Behavioral</div>
+          <div class="lens-desc">Does the system stay inside its lane: scope, escalation, crisis handling, disclosure of uncertainty?</div>
+        </div>
+        <div class="reveal">
+          <div class="lens-title">Cultural</div>
+          <div class="lens-desc">Does the output hold up across the populations who actually use it, not just the ones it was tested on?</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-num">03</span>
+        <span class="sec-label mono">Substrate &rarr; policy</span>
+      </div>
+      <h2 class="reveal">Coverage doesn't exist because the substrate doesn't exist.</h2>
+      <p class="reveal">Insurers are not short on appetite. They are short on data. No one can write a policy on a system whose failure modes and failure rates have never been measured. Verification at scale produces exactly that measurement: per-workflow evidence of what clinical AI does, how often it fails, and how severely.</p>
+      <p class="reveal">That evidence is the underwriting substrate. Substrate becomes policy. Policy shifts the liability. And liability, shifted, is what makes healthcare AI deployable.</p>
+      <div class="chain reveal">
+        <div class="chain-step">
+          <span class="chain-num">STEP 1</span>
+          <div class="chain-title">Verify</div>
+          <div class="chain-desc">Deterministic checks on every output, pre-release and at runtime.</div>
+        </div>
+        <div class="chain-step">
+          <span class="chain-num">STEP 2</span>
+          <div class="chain-title">Evidence</div>
+          <div class="chain-desc">Audit trails accumulate into measured failure modes and rates.</div>
+        </div>
+        <div class="chain-step">
+          <span class="chain-num">STEP 3</span>
+          <div class="chain-title">Substrate</div>
+          <div class="chain-desc">The actuarial dataset underwriting requires, per clinical workflow.</div>
+        </div>
+        <div class="chain-step">
+          <span class="chain-num">STEP 4</span>
+          <div class="chain-title">Policy</div>
+          <div class="chain-desc">Insurance gets written. Liability shifts. Deployment unblocks.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-num">04</span>
+        <span class="sec-label mono">Who it's for</span>
+      </div>
+      <h2 class="reveal">Built for the people who currently say no.</h2>
+      <p class="reveal">Chief risk officers, general counsel, compliance teams: the ones asked to approve clinical AI with nothing to stand on. If AI touches a clinical workflow in your organization, whether lab review, triage, or patient messaging, independent behavioral verification is the evidence that lets yes be a defensible answer.</p>
+      <div class="quiet-line reveal">Working with telehealth companies and health systems deploying AI in clinical workflows. Healthcare first; the same problem is coming for every high-liability profession.</div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2 class="reveal">Deploying clinical AI?</h2>
+      <p class="reveal">If liability is the thing standing between your AI and production, that is exactly the problem we work on.</p>
+      <!--email_off--><a href="mailto:mesh@interlocklabs.ai" class="cta reveal">Get in touch &rarr;</a><!--/email_off-->
+    </div>
+  </section>
+
+  <div class="wrap">
+    <footer class="footer">
+      <span class="footer-note">&copy; 2026 Interlock Labs</span>
+      <a href="https://www.linkedin.com/in/meshal/recent-activity/all/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        Follow our thinking
+      </a>
+    </footer>
+  </div>
+
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+      }
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal:not(.in)').forEach(el => obs.observe(el));
+  </script>
 
 </body>
 </html>
