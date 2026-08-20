@@ -27,7 +27,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .btn:hover{opacity:.85}
 em.u{font-style:italic}
 .rotline{font-family:'Newsreader',serif;font-style:italic;font-size:clamp(1.3rem,2.4vw,2rem);line-height:1.2;margin:-0.6rem auto 1.6rem;max-width:820px}
-.rotator{display:inline-grid;vertical-align:bottom;color:#B03A2E}
+.rotator{display:inline-grid;vertical-align:bottom;justify-items:center;color:inherit}
 .rotator span{grid-area:1/1;opacity:0;animation:rot 8s infinite}
 .rotator span:nth-child(1){animation-delay:0s}
 .rotator span:nth-child(2){animation-delay:2s}
@@ -98,7 +98,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.78);border-top:1px solid rg
 
 <header class="hero">
   <h1>Your AI makes decisions.<br>We keep the <em class="u">record</em>.</h1>
-  <div class="rotline">for <span class="rotator"><span>regulators.</span><span>insurers.</span><span>compliance.</span><span>legal.</span></span></div>
+  <div class="rotline"><span class="rotator"><span>for <i style="color:#B03A2E;font-style:italic">regulators.</i></span><span>for <i style="color:#B03A2E;font-style:italic">insurers.</i></span><span>for <i style="color:#B03A2E;font-style:italic">compliance.</i></span><span>for <i style="color:#B03A2E;font-style:italic">legal.</i></span></span></div>
   <p class="sub">Interlock replays your automated workflow's decisions against your own rules and records every one: what came in, which rules applied, where automation proceeded, where a person stepped in.</p>
   <!--email_off--><a class="btn" href="mailto:mesh@interlocklabs.ai">Talk to us</a><!--/email_off-->
   <p class="aud">Built for healthcare AI</p>
@@ -162,7 +162,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.78);border-top:1px solid rg
       <div class="beat"><p>Nothing touches production.</p></div>
     </div>
     <!--email_off--><a class="btn" href="mailto:mesh@interlocklabs.ai">Talk to us</a><!--/email_off-->
-    <p class="micro">Taking a small number of founding design partners</p>
   </div>
 </div>
 

@@ -26,7 +26,7 @@ a:hover{opacity:.72}
 .btn{display:inline-block;font-family:'IBM Plex Mono',monospace;font-weight:600;background:var(--ink);color:var(--paper)}
 h1,h2{font-weight:400;text-wrap:balance}
 .rotline{font-size:clamp(1.6rem,3.4vw,3rem);line-height:1.2;margin-top:14px;font-style:italic}
-.rotator{display:inline-grid;vertical-align:bottom;color:var(--margin)}
+.rotator{display:inline-grid;vertical-align:bottom;justify-items:center;color:inherit}
 .rotator span{grid-area:1/1;opacity:0;animation:rot 8s infinite}
 .rotator span:nth-child(1){animation-delay:0s}
 .rotator span:nth-child(2){animation-delay:2s}
@@ -59,7 +59,7 @@ h1,h2{font-weight:400;text-wrap:balance}
 <div class="entry" style="padding-top:60px;padding-bottom:36px">
   <span class="idx" style="top:68px">0001</span>
   <h1 style="font-size:clamp(2.2rem,4.8vw,4.3rem);line-height:1.05;letter-spacing:-.015em;max-width:1080px">Your AI makes decisions.<br>We keep the <em style="font-style:italic">record</em>.</h1>
-  <div class="rotline">for <span class="rotator"><span>regulators.</span><span>insurers.</span><span>compliance.</span><span>legal.</span></span></div>
+  <div class="rotline"><span class="rotator"><span>for <i style="color:var(--margin);font-style:italic">regulators.</i></span><span>for <i style="color:var(--margin);font-style:italic">insurers.</i></span><span>for <i style="color:var(--margin);font-style:italic">compliance.</i></span><span>for <i style="color:var(--margin);font-style:italic">legal.</i></span></span></div>
 </div>
 
 <div class="entry e2" style="padding-top:26px;padding-bottom:30px;display:flex;align-items:center;justify-content:space-between;gap:48px">
@@ -130,7 +130,6 @@ h1,h2{font-weight:400;text-wrap:balance}
   <p class="mono" style="font-size:14px;color:#0A0A0A;margin-bottom:34px">One workflow &middot; your historical data &middot; results in weeks &middot; nothing touches production</p>
   <div style="display:flex;align-items:center;gap:26px;flex-wrap:wrap">
     <!--email_off--><a class="btn" href="mailto:mesh@interlocklabs.ai" style="font-size:14px;padding:16px 38px">Talk to us</a><!--/email_off-->
-    <span class="mono" style="font-size:10.5px;letter-spacing:.12em;color:var(--dim)">TAKING A SMALL NUMBER OF FOUNDING DESIGN PARTNERS</span>
   </div>
 </div>
 
@@ -140,6 +139,7 @@ h1,h2{font-weight:400;text-wrap:balance}
     <span class="mono" style="font-weight:600;font-size:12px;color:#FFFFFF">INTERLOCK LABS</span>
   </div>
   <span class="mono" style="font-size:10.5px;letter-spacing:.14em">THE EVIDENCE LEDGER FOR AI DECISIONS</span>
+  <span class="mono" style="font-size:10.5px"><a href="https://www.linkedin.com/in/meshal/recent-activity/all/" target="_blank" rel="noopener">Follow our thinking &rarr;</a></span>
   <span class="mono" style="font-size:10.5px">&copy; 2026 INTERLOCK LABS</span>
 </div>
 
