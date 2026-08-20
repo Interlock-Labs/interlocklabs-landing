@@ -1,286 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interlock Labs</title>
-  <meta name="description" content="Your AI has a liability problem, not a technology problem. Interlock verifies AI decision workflows against your own rules and produces the evidence underwriting requires.">
-  <meta property="og:title" content="Interlock Labs">
-  <meta property="og:description" content="Your AI has a liability problem, not a technology problem.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://interlocklabs.ai/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Interlock Labs">
-  <meta name="twitter:description" content="Your AI has a liability problem, not a technology problem.">
-  <meta name="twitter:image" content="https://interlocklabs.ai/og-image.png">
-  <meta name="robots" content="index, follow">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230a0a0a'/><rect x='4' y='4' width='10' height='10' rx='1' fill='%23f8f6f2'/><rect x='18' y='4' width='10' height='10' rx='1' fill='%230a0a0a'/><rect x='4' y='18' width='10' height='10' rx='1' fill='%230a0a0a'/><rect x='18' y='18' width='10' height='10' rx='1' fill='%23f8f6f2'/></svg>" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --ink: #0a0a0a;
-      --paper: #f8f6f2;
-      --accent: #1a5c3a;
-      --muted: #555555;
-      --border: #d4d0c8;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--paper);
-      color: var(--ink);
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      opacity: 0.03;
-      pointer-events: none;
-      z-index: 1000;
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .frame {
-      width: 100%;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 0 3rem;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interlock | The evidence ledger for AI decisions</title>
+<meta name="description" content="Interlock replays your AI's decisions against your own rules and records every one. The ledger that answers whoever asks.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://interlocklabs.ai/">
+<meta property="og:title" content="Interlock | The evidence ledger for AI decisions">
+<meta property="og:description" content="Interlock replays your AI's decisions against your own rules and records every one. The ledger that answers whoever asks.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://interlocklabs.ai/">
+<meta property="og:image" content="https://interlocklabs.ai/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Interlock | The evidence ledger for AI decisions">
+<meta name="twitter:description" content="Interlock replays your AI's decisions against your own rules and records every one. The ledger that answers whoever asks.">
+<meta name="twitter:image" content="https://interlocklabs.ai/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;family=Instrument+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0a0a'/%3E%3Crect x='4' y='4' width='10' height='10' rx='1' fill='%23f8f6f2'/%3E%3Crect x='18' y='4' width='10' height='10' rx='1' fill='%230a0a0a'/%3E%3Crect x='4' y='18' width='10' height='10' rx='1' fill='%230a0a0a'/%3E%3Crect x='18' y='18' width='10' height='10' rx='1' fill='%23f8f6f2'/%3E%3C/svg%3E" type="image/svg+xml">
+<style>
+:root{
+  --white:#FFFFFF; --bone:#F2F2F2; --ink:#0A0A0A;
+  --body:#0A0A0A; --muted:#0A0A0A; --hairline:#0A0A0A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--white);color:var(--ink);font-family:'Instrument Sans',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--ink);color:var(--white)}
+h1,h2{text-wrap:balance;font-family:'Newsreader',serif;font-weight:400}
+a{color:var(--ink);text-decoration:none}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.label{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.13em;font-size:.68rem;color:var(--muted);font-weight:600}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+.btn{display:inline-block;font-size:.9rem;font-weight:600;padding:.8rem 1.7rem;border-radius:999px;background:var(--ink);color:var(--white)}
+.btn:hover{opacity:.85}
+em.u{font-style:italic}
+.rotline{font-family:'Newsreader',serif;font-style:italic;font-size:clamp(1.3rem,2.4vw,2rem);line-height:1.2;margin:-0.6rem auto 1.6rem;max-width:820px}
+.rotator{display:inline-grid;vertical-align:bottom;justify-items:center;color:inherit}
+.rotator span{grid-area:1/1;opacity:0;animation:rot 8s infinite}
+.rotator span:nth-child(1){animation-delay:0s}
+.rotator span:nth-child(2){animation-delay:2s}
+.rotator span:nth-child(3){animation-delay:4s}
+.rotator span:nth-child(4){animation-delay:6s}
+@keyframes rot{0%{opacity:0;transform:translateY(6px)}4%,22%{opacity:1;transform:translateY(0)}27%,100%{opacity:0;transform:translateY(-6px)}}
+@media(prefers-reduced-motion:reduce){.rotator span{animation:none}.rotator span:nth-child(1){opacity:1}}
 
-    /* watermark: the logomark grid, barely there */
-    .mark {
-      position: fixed;
-      right: -6vw;
-      bottom: -10vh;
-      width: 44vw;
-      max-width: 560px;
-      aspect-ratio: 1;
-      opacity: 0.04;
-      pointer-events: none;
-    }
+nav{display:flex;align-items:center;justify-content:space-between;max-width:1080px;margin:0 auto;padding:22px 28px}
+.logo{display:flex;align-items:center;gap:.7rem}
+.logo-word{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.95rem;letter-spacing:-.02em}
 
-    .nav {
-      padding: 1.75rem 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0s forwards;
-    }
-    .nav-logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: var(--ink);
-    }
-    .nav-logo svg { width: 34px; height: 34px; flex-shrink: 0; }
-    .nav-wordmark {
-      font-family: 'IBM Plex Mono', monospace;
-      font-weight: 600;
-      font-size: 1rem;
-      letter-spacing: -0.02em;
-    }
-    .nav-cta {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--ink);
-      text-decoration: none;
-      border: 1px solid var(--ink);
-      border-radius: 4px;
-      padding: 0.55rem 1.1rem;
-      transition: background 0.25s ease, color 0.25s ease;
-    }
-    .nav-cta:hover { background: var(--ink); color: var(--paper); }
+.hero{max-width:1080px;margin:0 auto;padding:72px 28px 16px;text-align:center}
+.hero h1{font-size:clamp(2.1rem,4.1vw,3.4rem);line-height:1.06;letter-spacing:-.01em;max-width:820px;margin:0 auto 1.6rem}
+.hero .sub{font-size:1.05rem;line-height:1.65;color:var(--body);max-width:600px;margin:0 auto 2.2rem}
+.hero .aud{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:1.4rem}
 
+.ledger-art{max-width:1080px;margin:56px auto 0;padding:0 28px;display:flex;justify-content:center}
+.ledger-art svg{max-width:100%;height:auto}
 
-    .main {
-      flex: 1;
-      display: flex;
-      align-items: center;
-    }
-    .hero { max-width: 100%; }
-    h1 { max-width: 15ch; }
-    .label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--accent);
-      margin-bottom: 2.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0.1s forwards;
-    }
-    .label::before {
-      content: '';
-      width: 8px; height: 8px;
-      background: var(--accent);
-      border-radius: 1px;
-      flex-shrink: 0;
-    }
-    h1 {
-      font-family: 'Instrument Serif', serif;
-      font-weight: 400;
-      font-size: clamp(2.8rem, 6.4vw, 5.2rem);
-      line-height: 1.04;
-      letter-spacing: -0.01em;
-      margin-bottom: 2.25rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0.25s forwards;
-    }
-    h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-    .subline {
-      font-size: 1.15rem;
-      line-height: 1.65;
-      color: var(--muted);
-      max-width: 44ch;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0.45s forwards;
-    }
-    .closer {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.78rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--ink);
-      margin-bottom: 2.75rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0.6s forwards;
-    }
-    .closer span { color: var(--accent); }
-    .cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.9rem 1.8rem;
-      background: var(--ink);
-      color: var(--paper);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.85rem;
-      font-weight: 500;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: background 0.3s ease, transform 0.2s ease;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0.75s forwards;
-    }
-    .cta:hover { background: var(--accent); transform: translateY(-2px); }
+.argument{max-width:1080px;margin:0 auto;padding:110px 28px}
+.argument h2{font-size:clamp(1.6rem,2.9vw,2.4rem);line-height:1.12;max-width:700px;margin:.8rem 0 1.6rem}
+.argument .para{font-size:1.05rem;line-height:1.7;color:var(--body);max-width:620px;margin-bottom:1.2rem}
+.askers{border-top:1px solid var(--ink);margin:2.8rem 0;max-width:820px}
+.ask{display:flex;gap:1.4rem;align-items:baseline;padding:1rem 0;border-bottom:1px solid var(--hairline)}
+.ask .who{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);min-width:180px}
+.ask p{font-size:1.02rem;font-weight:500}
+.measure{max-width:620px;font-style:italic;font-family:'Newsreader',serif;font-size:1.15rem;color:var(--body)}
+.brandline{font-family:'IBM Plex Mono',monospace;font-size:.9rem;letter-spacing:.09em;font-weight:600;margin-top:3rem}
+.brandline .b{background:var(--ink);color:var(--white);padding:.2rem .5rem;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 
-    .footer {
-      border-top: 1px solid var(--border);
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0.9s forwards;
-    }
-    .footer-inner {
-      padding: 1.5rem 0 1.75rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-    }
-    .lenses { display: flex; gap: 0.6rem; }
-    .footer a {
-      color: var(--muted);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: color 0.2s;
-      font-size: 0.68rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-    .footer a:hover { color: #0a66c2; }
-    .footer svg { width: 13px; height: 13px; }
+.closing{background:var(--ink);color:var(--white);padding:100px 0}
+.closing h2{color:var(--white);font-size:clamp(1.6rem,2.8vw,2.3rem);max-width:640px;margin-bottom:2.2rem}
+.beats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(255,255,255,.85);margin-bottom:2.4rem;max-width:960px}
+.beat{border-right:1px solid rgba(255,255,255,.85);padding:1.2rem 1.2rem 1.4rem}
+.beat:last-child{border-right:none}
+.beat p{font-size:.95rem;font-weight:500}
+.closing .btn{background:var(--white);color:var(--ink)}
+.closing .micro{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.78);margin-top:1.6rem}
 
-    @media (max-width: 640px) {
-      .frame { padding: 0 1.4rem; }
-      .nav { padding: 1.25rem 0; }
-      h1 { font-size: 2.35rem; }
-      .subline { font-size: 1rem; }
-      .lenses { display: none; }
-      .mark { display: none; }
-    }
-  </style>
+footer{background:var(--ink);color:rgba(255,255,255,.78);border-top:1px solid rgba(255,255,255,.15);padding:40px 0}
+.foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.foot .logo-word{color:var(--white);font-size:.85rem}
+.foot .pillars{font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.12em}
+
+@media(max-width:820px){
+  .hero{padding-top:56px}
+  .argument{padding:70px 28px}
+  .ask{flex-direction:column;gap:.2rem}
+  .beats{grid-template-columns:1fr 1fr}
+  .beat{border-bottom:1px solid rgba(255,255,255,.85);border-right:none}
+  .beat:nth-child(2n+1){border-right:1px solid rgba(255,255,255,.85)}
+  .beat:nth-last-child(-n+2){border-bottom:none}
+  .closing{padding:70px 0}
+  .foot{flex-direction:column;align-items:flex-start}
+}
+</style>
 </head>
 <body>
 
-  <svg class="mark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="10" y="10" width="82" height="82" rx="7" fill="#0a0a0a"/>
-    <rect x="108" y="10" width="82" height="82" rx="7" fill="none" stroke="#0a0a0a" stroke-width="6"/>
-    <rect x="10" y="108" width="82" height="82" rx="7" fill="none" stroke="#0a0a0a" stroke-width="6"/>
-    <rect x="108" y="108" width="82" height="82" rx="7" fill="#0a0a0a"/>
+<nav>
+  <a class="logo" href="/">
+    <svg width="28" height="28" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="7" fill="none" stroke="#0A0A0A" stroke-width="1.5"/><rect x="6" y="6" width="10" height="10" rx="2" fill="#0A0A0A"/><rect x="18" y="6" width="10" height="10" rx="2" fill="none" stroke="#0A0A0A"/><rect x="6" y="18" width="10" height="10" rx="2" fill="none" stroke="#0A0A0A"/><rect x="18" y="18" width="10" height="10" rx="2" fill="#0A0A0A"/></svg>
+    <span class="logo-word">INTERLOCK LABS</span>
+  </a>
+  <!--email_off--><a class="btn" style="font-size:.8rem;padding:.6rem 1.3rem" href="/intake/">Talk to us</a><!--/email_off-->
+</nav>
+
+<header class="hero">
+  <h1>Your AI makes decisions.<br>We keep the <em class="u">record</em>.</h1>
+  <div class="rotline"><span class="rotator"><span>for <i style="color:#B03A2E;font-style:italic">regulators.</i></span><span>for <i style="color:#B03A2E;font-style:italic">insurers.</i></span><span>for <i style="color:#B03A2E;font-style:italic">compliance.</i></span><span>for <i style="color:#B03A2E;font-style:italic">legal.</i></span></span></div>
+  <p class="sub">Interlock replays your automated workflow's decisions against your own rules and records every one: what came in, which rules applied, where automation proceeded, where a person stepped in.</p>
+  <!--email_off--><a class="btn" href="/intake/">Talk to us</a><!--/email_off-->
+  <p class="aud">Built for healthcare AI</p>
+</header>
+
+<div class="ledger-art">
+  <svg width="760" height="300" viewBox="0 0 760 300" aria-hidden="true">
+    <path d="M60 60 C 160 80, 230 130, 320 146" stroke="#0A0A0A" stroke-width="1.2" fill="none"></path>
+    <path d="M66 150 C 170 150, 240 150, 320 150" stroke="#0A0A0A" stroke-width="1.2" fill="none"></path>
+    <path d="M76 244 C 175 226, 240 176, 322 156" stroke="#0A0A0A" stroke-width="1.2" fill="none"></path>
+    <text x="42" y="48" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#0A0A0A">lab review</text>
+    <rect x="20" y="56" width="42" height="28" rx="6" fill="none" stroke="#0A0A0A" stroke-width="1.3"></rect>
+    <text x="44" y="138" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#0A0A0A">intake</text>
+    <rect x="24" y="146" width="42" height="28" rx="6" fill="none" stroke="#0A0A0A" stroke-width="1.3"></rect>
+    <text x="56" y="232" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#0A0A0A">documentation</text>
+    <rect x="34" y="240" width="42" height="28" rx="6" fill="none" stroke="#0A0A0A" stroke-width="1.3"></rect>
+    <rect x="324" y="124" width="52" height="52" rx="10" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="1.6"></rect>
+    <rect x="334" y="134" width="13" height="13" rx="3" fill="#0A0A0A"></rect>
+    <rect x="353" y="134" width="13" height="13" rx="3" fill="none" stroke="#0A0A0A" stroke-width="1.4"></rect>
+    <rect x="334" y="153" width="13" height="13" rx="3" fill="none" stroke="#0A0A0A" stroke-width="1.4"></rect>
+    <rect x="353" y="153" width="13" height="13" rx="3" fill="#0A0A0A"></rect>
+    <line x1="376" y1="150" x2="446" y2="150" stroke="#0A0A0A" stroke-width="1.4"></line>
+    <path d="M446 150 L 439 146 M446 150 L 439 154" stroke="#0A0A0A" stroke-width="1.4" fill="none"></path>
+    <rect x="452" y="60" width="250" height="180" rx="8" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="1.6"></rect>
+    <text x="470" y="90" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="2" fill="#0A0A0A" font-weight="600">THE LEDGER</text>
+    <line x1="470" y1="112" x2="684" y2="112" stroke="#0A0A0A" stroke-width="1.1"></line>
+    <text x="470" y="134" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#0A0A0A">0412  what came in</text>
+    <line x1="470" y1="144" x2="684" y2="144" stroke="#0A0A0A" stroke-width="1"></line>
+    <text x="470" y="166" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#0A0A0A">0413  which rules applied</text>
+    <line x1="470" y1="176" x2="684" y2="176" stroke="#0A0A0A" stroke-width="1"></line>
+    <text x="470" y="198" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#0A0A0A">0414  automation proceeded</text>
+    <line x1="470" y1="208" x2="684" y2="208" stroke="#0A0A0A" stroke-width="1"></line>
+    <text x="470" y="228" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#0A0A0A">0415  a person decided</text>
   </svg>
+</div>
 
-  <div class="frame">
-    <nav class="nav">
-      <a href="/" class="nav-logo">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-          <rect x="4.41" y="4.41" width="191.18" height="191.18" rx="23.53" fill="#0a0a0a" stroke="#f8f6f2" stroke-width="8.82"/>
-          <rect x="29.41" y="29.41" width="64.71" height="64.71" rx="5.88" fill="#f8f6f2"/>
-          <rect x="105.88" y="29.41" width="64.71" height="64.71" rx="5.88" fill="none" stroke="#f8f6f2" stroke-width="5.88"/>
-          <rect x="29.41" y="105.88" width="64.71" height="64.71" rx="5.88" fill="none" stroke="#f8f6f2" stroke-width="5.88"/>
-          <rect x="105.88" y="105.88" width="64.71" height="64.71" rx="5.88" fill="#f8f6f2"/>
-        </svg>
-        <span class="nav-wordmark">INTERLOCK LABS</span>
-      </a>
-      <!--email_off--><a href="mailto:mesh@interlocklabs.ai" class="nav-cta">Get in touch</a><!--/email_off-->
-    </nav>
+<section class="argument">
+  <div class="wrap" style="padding:0">
+    <span class="label">Why a ledger</span>
+    <h2>Every decision answers to someone.</h2>
+    <p class="para">Your automated workflows read labs, triage intake, draft patient messages, write clinical documentation. Each of those decisions has someone who may ask what was done, and against what standard.</p>
+    <div class="askers">
+      <div class="ask"><span class="who">Your clinical lead</span><p>deciding what still needs review.</p></div>
+      <div class="ask"><span class="who">Your counsel</span><p>after something goes wrong.</p></div>
+      <div class="ask"><span class="who">A customer's risk team</span><p>before the contract closes.</p></div>
+      <div class="ask"><span class="who">A regulator</span><p>after a complaint.</p></div>
+      <div class="ask"><span class="who">Your insurer</span><p>when it's time to price the risk.</p></div>
+    </div>
+    <p class="para">Each of them receives the same answer: the ledger. It shows where automation carried the workflow and where your people made the decisions. You decide who decides; the ledger records it.</p>
+    <p class="brandline">MEASURED RISK GETS COVERED. <span class="b">COVERED RISK GETS DEPLOYED.</span></p>
   </div>
+</section>
 
-  <main class="main">
-    <div class="frame">
-      <div class="hero">
-        <div class="label">The underwriting evidence layer for AI decision workflows</div>
-        <h1>Your AI has a <em>liability</em> problem, not a technology problem.</h1>
-        <p class="subline">Insurers have started excluding AI from coverage, one renewal at a time. Interlock verifies AI decision workflows against your own rules and produces the evidence underwriting requires.</p>
-        <div class="closer">Measured risk gets covered. <span>Covered risk gets deployed.</span></div>
-        <!--email_off--><a href="mailto:mesh@interlocklabs.ai" class="cta">Get in touch &rarr;</a><!--/email_off-->
-      </div>
+<div class="closing">
+  <div class="wrap">
+    <h2>Start the ledger on one workflow.</h2>
+    <div class="beats">
+      <div class="beat"><p>One workflow.</p></div>
+      <div class="beat"><p>Your historical data.</p></div>
+      <div class="beat"><p>Results in weeks.</p></div>
+      <div class="beat"><p>Nothing touches production.</p></div>
     </div>
-  </main>
+    <!--email_off--><a class="btn" href="/intake/">Talk to us</a><!--/email_off-->
+  </div>
+</div>
 
-  <footer class="footer">
-    <div class="frame">
-      <div class="footer-inner">
-        <span>&copy; 2026 Interlock Labs</span>
-        <span class="lenses"><span>Verify</span>&middot;<span>Record</span>&middot;<span>Insure</span></span>
-        <a href="https://www.linkedin.com/in/meshal/recent-activity/all/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          Follow our thinking
-        </a>
-      </div>
+<footer>
+  <div class="wrap foot">
+    <div class="logo" style="gap:.6rem">
+      <svg width="20" height="20" viewBox="0 0 34 34" aria-hidden="true"><rect x="0" y="0" width="34" height="34" rx="8" fill="#FFFFFF"/><rect x="1" y="1" width="32" height="32" rx="7" fill="none" stroke="#0A0A0A" stroke-width="1.5"/><rect x="6" y="6" width="10" height="10" rx="2" fill="#0A0A0A"/><rect x="18" y="6" width="10" height="10" rx="2" fill="none" stroke="#0A0A0A"/><rect x="6" y="18" width="10" height="10" rx="2" fill="none" stroke="#0A0A0A"/><rect x="18" y="18" width="10" height="10" rx="2" fill="#0A0A0A"/></svg>
+      <span class="logo-word">INTERLOCK LABS</span>
     </div>
-  </footer>
+    <div class="pillars">THE EVIDENCE LEDGER FOR AI DECISIONS</div>
+    <div style="font-size:.82rem"><a href="https://www.linkedin.com/company/112284936/" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:underline;text-underline-offset:3px">Follow our thinking &rarr;</a></div>
+    <div style="font-size:.8rem">&copy; 2026 Interlock Labs</div>
+  </div>
+</footer>
 
 </body>
 </html>
