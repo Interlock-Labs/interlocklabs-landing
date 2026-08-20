@@ -66,6 +66,7 @@ footer span, footer a{font-family:'IBM Plex Mono',monospace;font-size:.64rem;col
     <div class="q">What's your name?</div>
     <div class="hint">So we know who we're talking to.</div>
     <input type="text" id="f-name" autocomplete="name" aria-label="Your name">
+    <input type="text" id="f-website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;height:0;width:0;opacity:0" aria-hidden="true">
     <div class="err" id="e-0"></div>
     <div class="controls"><button class="btn" onclick="next()">Next</button><span class="keyhint">press <b>Enter</b></span></div>
   </div>
@@ -109,8 +110,8 @@ footer span, footer a{font-family:'IBM Plex Mono',monospace;font-size:.64rem;col
   <div class="step done" data-step="5">
     <div class="qn">SENT</div>
     <div class="q">Thank you.</div>
-    <p id="donetext">Your email app should have opened with your answers addressed to us. Press send there and we'll get back to you within a day or two.</p>
-    <p class="mono" style="font-size:.72rem;color:var(--dim)">Nothing opened? Email us directly: <a href="mailto:mesh@interlocklabs.ai" style="text-decoration:underline">mesh@interlocklabs.ai</a></p>
+    <p id="donetext">We received your answers. We'll get back to you within a day or two.</p>
+    <p class="mono" style="font-size:.72rem;color:var(--dim)">Prefer email? <a href="mailto:mesh@interlocklabs.ai" style="text-decoration:underline">mesh@interlocklabs.ai</a></p>
     <div class="controls"><a class="btn" href="/">Back to the site</a></div>
   </div>
 </main>
@@ -142,10 +143,16 @@ function next(){
 }
 function back(){if(cur>0){cur--;show(cur)}}
 function submit(){
-  var body = 'Name: '+val('f-name')+'\nCompany: '+val('f-company')+'\nEmail: '+val('f-email')+'\nWorkflow: '+val('f-workflow')+(val('f-notes')?'\n\nNotes:\n'+val('f-notes'):'');
-  var url = 'mailto:mesh@interlocklabs.ai?subject='+encodeURIComponent('Design partner intake: '+val('f-company'))+'&body='+encodeURIComponent(body);
-  cur = 5; show(5);
-  window.location.href = url;
+  var payload = {name:val('f-name'),company:val('f-company'),email:val('f-email'),workflow:val('f-workflow'),notes:val('f-notes'),website:val('f-website')};
+  var btn = document.querySelector('[data-step="4"] .btn'); btn.disabled = true; btn.textContent = 'Sending...';
+  fetch('https://lmmsrs1qdh.execute-api.us-east-2.amazonaws.com', {method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)})
+    .then(function(r){ if(!r.ok) throw new Error('bad status'); cur = 5; show(5); })
+    .catch(function(){
+      var body = 'Name: '+payload.name+'\nCompany: '+payload.company+'\nEmail: '+payload.email+'\nWorkflow: '+payload.workflow+(payload.notes?'\n\nNotes:\n'+payload.notes:'');
+      document.getElementById('donetext').textContent = "Our form service didn't respond, so your email app has opened with your answers instead. Press send there and we'll get back to you.";
+      cur = 5; show(5);
+      window.location.href = 'mailto:mesh@interlocklabs.ai?subject='+encodeURIComponent('Design partner intake: '+payload.company)+'&body='+encodeURIComponent(body);
+    });
 }
 document.addEventListener('keydown', function(ev){
   if(ev.key!=='Enter') return;
