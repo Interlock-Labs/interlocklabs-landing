@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interlock Labs Style Guide</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;family=Instrument+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0a0a'/%3E%3Crect x='4' y='4' width='10' height='10' rx='1' fill='%23f8f6f2'/%3E%3Crect x='18' y='4' width='10' height='10' rx='1' fill='%230a0a0a'/%3E%3Crect x='4' y='18' width='10' height='10' rx='1' fill='%230a0a0a'/%3E%3Crect x='18' y='18' width='10' height='10' rx='1' fill='%23f8f6f2'/%3E%3C/svg%3E" type="image/svg+xml">
+<style>
+:root{--ink:#0A0A0A;--paper:#FFFFFF;--rule:#E7E7E7;--dim:#4D4D4D;--red:#B03A2E}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Instrument Sans',sans-serif;line-height:1.6}
+::selection{background:var(--ink);color:var(--paper)}
+a{color:var(--ink)}
+h1,h2{font-family:'Newsreader',serif;font-weight:400}
+.mono{font-family:'IBM Plex Mono',monospace}
+.wrap{max-width:960px;margin:0 auto;padding:0 28px}
+.label{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600}
+.section{padding:72px 0 0;border-top:1px solid var(--ink);margin-top:72px}
+.section:first-of-type{border-top:none;margin-top:0}
+.num{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--red)}
+h2{font-size:2rem;margin:.5rem 0 1.4rem}
+.note{font-size:.98rem;color:#1F1F1F;max-width:600px;margin-bottom:2rem}
+.swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.sw{border:1px solid var(--ink)}
+.sw .chip{height:88px}
+.sw .meta{padding:10px 12px;border-top:1px solid var(--ink);font-family:'IBM Plex Mono',monospace;font-size:.66rem;line-height:1.8}
+.typerow{border-top:1px solid var(--rule);padding:20px 0;display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:baseline}
+.typerow .spec{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--dim);line-height:1.9}
+.comp{border:1px solid var(--rule);padding:36px;margin-top:18px;display:flex;flex-wrap:wrap;gap:26px;align-items:center}
+.btn{display:inline-block;font-size:.9rem;font-weight:600;padding:.8rem 1.9rem;border-radius:999px;background:var(--ink);color:var(--paper);text-decoration:none}
+.btn-outline{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.8rem;font-weight:600;padding:.6rem 1.3rem;border:1.5px solid var(--ink);color:var(--ink);text-decoration:none}
+.badge{display:inline-block;border:1px solid var(--rule);background:#F2F2F2;font-family:'IBM Plex Mono',monospace;font-size:.66rem;font-weight:500;letter-spacing:.11em;text-transform:uppercase;padding:.5rem 1.1rem;border-radius:999px}
+.rot-demo{font-family:'Newsreader',serif;font-style:italic;font-size:1.7rem}
+.rotator{display:inline-grid;vertical-align:bottom;justify-items:center}
+.rotator span{grid-area:1/1;opacity:0;animation:rot 8s infinite}
+.rotator span:nth-child(1){animation-delay:0s}.rotator span:nth-child(2){animation-delay:2s}.rotator span:nth-child(3){animation-delay:4s}.rotator span:nth-child(4){animation-delay:6s}
+@keyframes rot{0%{opacity:0;transform:translateY(6px)}4%,22%{opacity:1;transform:translateY(0)}27%,100%{opacity:0;transform:translateY(-6px)}}
+@media(prefers-reduced-motion:reduce){.rotator span{animation:none}.rotator span:nth-child(1){opacity:1}}
+.sheet{position:relative;max-width:640px;background:#FFF;border:1.5px solid var(--ink);box-shadow:0 18px 44px rgba(0,0,0,.12)}
+.sheet::before{content:'';position:absolute;left:56px;top:0;bottom:0;width:1.5px;background:var(--red);opacity:.85}
+.sheet-head{padding:12px 20px 10px 76px;border-bottom:1.5px solid var(--ink);font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.2em}
+.srow{padding:9px 20px 9px 76px;border-bottom:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:11.5px}
+.srow:last-child{border-bottom:none}
+.srow .n{color:var(--red);margin-right:14px}
+.brandband{font-family:'IBM Plex Mono',monospace;font-size:.85rem;letter-spacing:.09em;font-weight:600}
+.brandband .b{background:var(--ink);color:var(--paper);padding:.2rem .5rem}
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--ink);margin-top:18px}
+.dd{padding:22px 26px;font-size:.94rem}
+.dd+.dd{border-left:1px solid var(--ink)}
+.dd .h{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.13em;margin-bottom:12px;font-weight:600}
+.dd ul{list-style:none}
+.dd li{padding:5px 0;border-bottom:1px solid var(--rule)}
+.dd li:last-child{border-bottom:none}
+.marks{display:flex;gap:40px;align-items:center;flex-wrap:wrap}
+.markcell{text-align:center}
+.markcell .cap{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:10px}
+.darkstrip{background:var(--ink);padding:22px 28px;display:inline-flex;align-items:center;gap:12px}
+footer{margin-top:96px;background:var(--ink);color:rgba(255,255,255,.82);padding:30px 0}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.1em}
+@media(max-width:760px){.swatches{grid-template-columns:1fr 1fr}.typerow{grid-template-columns:1fr}.dodont{grid-template-columns:1fr}.dd+.dd{border-left:none;border-top:1px solid var(--ink)}}
+</style>
+</head>
+<body>
+
+<div class="wrap" style="padding-top:56px">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px">
+    <div>
+      <span class="label">Interlock Labs</span>
+      <h1 style="font-size:clamp(2.2rem,4.5vw,3.4rem);line-height:1.05;margin-top:.4rem">Style guide.</h1>
+    </div>
+    <span class="mono" style="font-size:.7rem;color:var(--dim)">V1 &middot; AUGUST 2026 &middot; THE LEDGER SYSTEM</span>
+  </div>
+
+  <div class="section">
+    <span class="num">01</span>
+    <h2>Logomark</h2>
+    <p class="note">A 2x2 grid: top-left and bottom-right filled, top-right and bottom-left outlined, inside a rounded frame. On dark grounds the mark sits on a white tile; it is never color-inverted, because inversion flips which squares read as filled.</p>
+    <div class="marks">
+      <div class="markcell">
+        <svg width="72" height="72" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="7" fill="none" stroke="#0A0A0A" stroke-width="1.5"/><rect x="6" y="6" width="10" height="10" rx="2" fill="#0A0A0A"/><rect x="18" y="6" width="10" height="10" rx="2" fill="none" stroke="#0A0A0A"/><rect x="6" y="18" width="10" height="10" rx="2" fill="none" stroke="#0A0A0A"/><rect x="18" y="18" width="10" height="10" rx="2" fill="#0A0A0A"/></svg>
+        <div class="cap">PRIMARY &middot; INK ON LIGHT</div>
+      </div>
+      <div class="markcell">
+        <div class="darkstrip">
+          <svg width="40" height="40" viewBox="0 0 34 34" aria-hidden="true"><rect x="0" y="0" width="34" height="34" rx="8" fill="#FFFFFF"/><rect x="1" y="1" width="32" height="32" rx="7" fill="none" stroke="#0A0A0A" stroke-width="1.5"/><rect x="6" y="6" width="10" height="10" rx="2" fill="#0A0A0A"/><rect x="18" y="6" width="10" height="10" rx="2" fill="none" stroke="#0A0A0A"/><rect x="6" y="18" width="10" height="10" rx="2" fill="none" stroke="#0A0A0A"/><rect x="18" y="18" width="10" height="10" rx="2" fill="#0A0A0A"/></svg>
+          <span class="mono" style="color:#FFF;font-weight:600;font-size:12px">INTERLOCK LABS</span>
+        </div>
+        <div class="cap">ON DARK &middot; WHITE TILE, NEVER INVERTED</div>
+      </div>
+      <div class="markcell">
+        <div style="display:flex;align-items:center;gap:10px">
+          <svg width="26" height="26" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="7" fill="none" stroke="#0A0A0A" stroke-width="1.5"/><rect x="6" y="6" width="10" height="10" rx="2" fill="#0A0A0A"/><rect x="18" y="6" width="10" height="10" rx="2" fill="none" stroke="#0A0A0A"/><rect x="6" y="18" width="10" height="10" rx="2" fill="none" stroke="#0A0A0A"/><rect x="18" y="18" width="10" height="10" rx="2" fill="#0A0A0A"/></svg>
+          <span class="mono" style="font-weight:600;font-size:13px;letter-spacing:-.02em">INTERLOCK LABS</span>
+        </div>
+        <div class="cap">LOCKUP &middot; MONO 600, TRACKING -0.02EM</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="num">02</span>
+    <h2>Color</h2>
+    <p class="note">Black and white, strictly neutral: no warm or tinted grays anywhere. Rules and hairlines are solid ink wherever they carry structure. Ledger Red is reserved for ledger artifacts only: the margin rule, entry numbers, and the rotating audience word. It is never decorative and never used for emphasis in body copy.</p>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#0A0A0A"></div><div class="meta">INK<br>#0A0A0A<br>text, rules, bands</div></div>
+      <div class="sw"><div class="chip" style="background:#FFFFFF"></div><div class="meta">PAPER<br>#FFFFFF<br>ground</div></div>
+      <div class="sw"><div class="chip" style="background:#4D4D4D"></div><div class="meta">DIM<br>#4D4D4D<br>secondary text</div></div>
+      <div class="sw"><div class="chip" style="background:#E7E7E7"></div><div class="meta">RULE GRAY<br>#E7E7E7<br>soft row rules only</div></div>
+      <div class="sw"><div class="chip" style="background:#B03A2E"></div><div class="meta">LEDGER RED<br>#B03A2E<br>ledger artifacts only</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="num">03</span>
+    <h2>Type</h2>
+    <p class="note">Three faces, three jobs. Newsreader is never bold; emphasis is italic. Mono labels are uppercase with wide tracking. Body stays at comfortable reading sizes; the scale earns attention through contrast, not weight.</p>
+    <div class="typerow">
+      <div class="spec">NEWSREADER 400<br>DISPLAY &middot; H1 34-68PX<br>ITALIC FOR EMPHASIS</div>
+      <div style="font-family:'Newsreader',serif;font-size:2.4rem;line-height:1.1">Your AI makes decisions. We keep the <em>record</em>.</div>
+    </div>
+    <div class="typerow">
+      <div class="spec">INSTRUMENT SANS 400-600<br>BODY &middot; 16-19PX</div>
+      <div style="font-size:1.02rem;max-width:560px">Interlock replays your automated workflow's decisions against your own rules and records every one.</div>
+    </div>
+    <div class="typerow">
+      <div class="spec">IBM PLEX MONO 400-600<br>LABELS + DATA &middot; 10-13PX<br>UPPERCASE, +0.11EM</div>
+      <div class="mono" style="font-size:.72rem;letter-spacing:.13em;color:var(--dim)">BUILT FOR HEALTHCARE AI &middot; THE EVIDENCE LEDGER FOR AI DECISIONS</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="num">04</span>
+    <h2>Components</h2>
+    <p class="note">The working set, as shipped on the previews. One primary action per page, repeated; the rotator cycles four audiences at two seconds each, whole phrase as one unit so no dead space opens; the ledger sheet is the product shown as a physical document, red margin inside.</p>
+    <div class="comp">
+      <a class="btn" href="#" onclick="return false">Talk to us</a>
+      <a class="btn-outline" href="#" onclick="return false">Talk to us</a>
+      <span class="badge">For healthcare AI companies</span>
+      <span class="rot-demo">for <span class="rotator"><span style="color:var(--red)">regulators.</span><span style="color:var(--red)">insurers.</span><span style="color:var(--red)">compliance.</span><span style="color:var(--red)">legal.</span></span></span>
+    </div>
+    <div class="comp" style="display:block">
+      <div class="sheet">
+        <div class="sheet-head">THE LEDGER</div>
+        <div class="srow"><span class="n">0412</span>lab review &middot; result panel in &middot; rule 3.2 applied &middot; automation proceeded</div>
+        <div class="srow"><span class="n">0413</span>intake &middot; questionnaire in &middot; rule 1.4 applied &middot; automation proceeded</div>
+        <div class="srow"><span class="n">0414</span>documentation &middot; draft note in &middot; rule 4.1 applied &middot; a person decided</div>
+      </div>
+    </div>
+    <div class="comp">
+      <span class="brandband">MEASURED RISK GETS COVERED. <span class="b">COVERED RISK GETS DEPLOYED.</span></span>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="num">05</span>
+    <h2>Voice</h2>
+    <p class="note">The page speaks as one person: plain, professional, declarative. Interlock is an evidence ledger with many uses; it never routes, escalates, or certifies, and it never decides for the customer.</p>
+    <div class="dodont">
+      <div class="dd">
+        <div class="h" style="color:var(--ink)">ALWAYS</div>
+        <ul>
+          <li>Evidence ledger, decision record, workflow</li>
+          <li>Verbs: check, flag, measure, record, keep</li>
+          <li>Record states: WITHIN RULES / NEEDS A PERSON</li>
+          <li>"You decide who decides; the ledger records it."</li>
+          <li>Insurance vocabulary only in the liability section and footer</li>
+          <li>Professional register a risk officer can forward</li>
+        </ul>
+      </div>
+      <div class="dd">
+        <div class="h" style="color:var(--red)">NEVER</div>
+        <ul>
+          <li>PASS / FAIL badges or verdict stamps</li>
+          <li>Route, escalate, certify, guarantee, seal</li>
+          <li>Insurance language above the fold</li>
+          <li>Pricing or "free" on the public page</li>
+          <li>Insider doctrine lines as page copy</li>
+          <li>Warm-tinted neutrals, decorative color, gradients</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <span>INTERLOCK LABS &middot; STYLE GUIDE V1</span>
+    <span>INTERNAL &middot; NOT LINKED FROM THE SITE</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talk to Interlock</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;family=Instrument+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0a0a'/%3E%3Crect x='4' y='4' width='10' height='10' rx='1' fill='%23f8f6f2'/%3E%3Crect x='18' y='4' width='10' height='10' rx='1' fill='%230a0a0a'/%3E%3Crect x='4' y='18' width='10' height='10' rx='1' fill='%230a0a0a'/%3E%3Crect x='18' y='18' width='10' height='10' rx='1' fill='%23f8f6f2'/%3E%3C/svg%3E" type="image/svg+xml">
+<style>
+:root{--ink:#0A0A0A;--paper:#FFFFFF;--rule:#E7E7E7;--dim:#4D4D4D;--red:#B03A2E}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);font-family:'Instrument Sans',sans-serif;line-height:1.5;display:flex;flex-direction:column}
+::selection{background:var(--ink);color:var(--paper)}
+a{color:var(--ink);text-decoration:none}
+.mono{font-family:'IBM Plex Mono',monospace}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;border-bottom:1px solid var(--rule)}
+.logo{display:flex;align-items:center;gap:.7rem}
+.logo-word{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.9rem;letter-spacing:-.02em}
+.prog{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--dim);letter-spacing:.1em}
+
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:32px 28px}
+.step{display:none;width:100%;max-width:640px}
+.step.active{display:block;animation:up .35s ease}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.step.active{animation:none}}
+.qn{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--red);letter-spacing:.1em;margin-bottom:14px}
+.q{font-family:'Newsreader',serif;font-weight:400;font-size:clamp(1.6rem,3.4vw,2.4rem);line-height:1.15;margin-bottom:6px;text-wrap:balance}
+.hint{font-size:.92rem;color:var(--dim);margin-bottom:26px}
+input[type=text],input[type=email],textarea{width:100%;border:none;border-bottom:1.5px solid var(--ink);background:transparent;font-family:'Newsreader',serif;font-size:1.5rem;padding:6px 2px 10px;outline:none;border-radius:0}
+textarea{resize:none;min-height:76px;font-size:1.25rem;line-height:1.5}
+input:focus,textarea:focus{border-bottom-color:var(--red)}
+.err{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--red);letter-spacing:.06em;margin-top:10px;min-height:16px}
+.controls{display:flex;align-items:center;gap:18px;margin-top:26px}
+.btn{display:inline-block;font-size:.95rem;font-weight:600;padding:.85rem 2.1rem;border-radius:999px;background:var(--ink);color:var(--paper);border:none;cursor:pointer;font-family:'Instrument Sans',sans-serif}
+.btn:hover{opacity:.85}
+.keyhint{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--dim);letter-spacing:.06em}
+.keyhint b{border:1px solid var(--rule);padding:1px 6px;border-radius:3px;font-weight:600}
+.back{background:none;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--dim);letter-spacing:.08em;padding:6px 0}
+.back:hover{color:var(--ink)}
+.done .q{margin-bottom:14px}
+.done p{font-size:1.02rem;color:#1F1F1F;max-width:520px;margin-bottom:24px}
+footer{padding:18px 28px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer span, footer a{font-family:'IBM Plex Mono',monospace;font-size:.64rem;color:var(--dim);letter-spacing:.1em}
+.bar{position:fixed;top:0;left:0;height:2px;background:var(--red);transition:width .3s ease;z-index:10}
+</style>
+</head>
+<body>
+<div class="bar" id="bar" style="width:0"></div>
+
+<nav>
+  <a class="logo" href="/">
+    <svg width="24" height="24" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="7" fill="none" stroke="#0A0A0A" stroke-width="1.5"/><rect x="6" y="6" width="10" height="10" rx="2" fill="#0A0A0A"/><rect x="18" y="6" width="10" height="10" rx="2" fill="none" stroke="#0A0A0A"/><rect x="6" y="18" width="10" height="10" rx="2" fill="none" stroke="#0A0A0A"/><rect x="18" y="18" width="10" height="10" rx="2" fill="#0A0A0A"/></svg>
+    <span class="logo-word">INTERLOCK LABS</span>
+  </a>
+  <span class="prog" id="prog">1 / 5</span>
+</nav>
+
+<main>
+  <div class="step active" data-step="0">
+    <div class="qn">01</div>
+    <div class="q">What's your name?</div>
+    <div class="hint">So we know who we're talking to.</div>
+    <input type="text" id="f-name" autocomplete="name" aria-label="Your name">
+    <div class="err" id="e-0"></div>
+    <div class="controls"><button class="btn" onclick="next()">Next</button><span class="keyhint">press <b>Enter</b></span></div>
+  </div>
+
+  <div class="step" data-step="1">
+    <div class="qn">02</div>
+    <div class="q">And your company?</div>
+    <div class="hint">The team whose workflow we'd be looking at.</div>
+    <input type="text" id="f-company" autocomplete="organization" aria-label="Company">
+    <div class="err" id="e-1"></div>
+    <div class="controls"><button class="btn" onclick="next()">Next</button><span class="keyhint">press <b>Enter</b></span><button class="back" onclick="back()">&larr; BACK</button></div>
+  </div>
+
+  <div class="step" data-step="2">
+    <div class="qn">03</div>
+    <div class="q">What's your work email?</div>
+    <div class="hint">We reply within a day or two.</div>
+    <input type="email" id="f-email" autocomplete="email" aria-label="Work email">
+    <div class="err" id="e-2"></div>
+    <div class="controls"><button class="btn" onclick="next()">Next</button><span class="keyhint">press <b>Enter</b></span><button class="back" onclick="back()">&larr; BACK</button></div>
+  </div>
+
+  <div class="step" data-step="3">
+    <div class="qn">04</div>
+    <div class="q">Which workflow would you start the ledger on?</div>
+    <div class="hint">Lab review, intake, patient communications, documentation, or something else entirely.</div>
+    <input type="text" id="f-workflow" aria-label="Workflow">
+    <div class="err" id="e-3"></div>
+    <div class="controls"><button class="btn" onclick="next()">Next</button><span class="keyhint">press <b>Enter</b></span><button class="back" onclick="back()">&larr; BACK</button></div>
+  </div>
+
+  <div class="step" data-step="4">
+    <div class="qn">05</div>
+    <div class="q">Anything else we should know?</div>
+    <div class="hint">Optional. Timelines, constraints, what prompted this.</div>
+    <textarea id="f-notes" aria-label="Notes"></textarea>
+    <div class="err" id="e-4"></div>
+    <div class="controls"><button class="btn" onclick="next()">Send</button><span class="keyhint"><b>Enter</b> to send &middot; <b>Shift+Enter</b> for a new line</span><button class="back" onclick="back()">&larr; BACK</button></div>
+  </div>
+
+  <div class="step done" data-step="5">
+    <div class="qn">SENT</div>
+    <div class="q">Thank you.</div>
+    <p id="donetext">Your email app should have opened with your answers addressed to us. Press send there and we'll get back to you within a day or two.</p>
+    <p class="mono" style="font-size:.72rem;color:var(--dim)">Nothing opened? Email us directly: <a href="mailto:mesh@interlocklabs.ai" style="text-decoration:underline">mesh@interlocklabs.ai</a></p>
+    <div class="controls"><a class="btn" href="/">Back to the site</a></div>
+  </div>
+</main>
+
+<footer>
+  <span>INTERLOCK LABS &middot; THE EVIDENCE LEDGER FOR AI DECISIONS</span>
+  <a href="https://www.linkedin.com/company/112284936/" target="_blank" rel="noopener" style="text-decoration:underline">FOLLOW OUR THINKING</a>
+</footer>
+
+<script>
+var cur = 0, total = 5;
+function show(i){
+  document.querySelectorAll('.step').forEach(function(s){s.classList.remove('active')});
+  document.querySelector('[data-step="'+i+'"]').classList.add('active');
+  document.getElementById('prog').textContent = (Math.min(i+1,total)) + ' / ' + total;
+  document.getElementById('bar').style.width = (Math.min(i,total)/total*100) + '%';
+  var inp = document.querySelector('[data-step="'+i+'"] input, [data-step="'+i+'"] textarea');
+  if(inp) setTimeout(function(){inp.focus()}, 60);
+}
+function val(id){var e=document.getElementById(id);return e?e.value.trim():''}
+function next(){
+  var e = document.getElementById('e-'+cur); if(e) e.textContent='';
+  if(cur===0 && !val('f-name')){e.textContent='YOUR NAME HELPS US SAY HELLO PROPERLY';return}
+  if(cur===1 && !val('f-company')){e.textContent='COMPANY NAME, PLEASE';return}
+  if(cur===2 && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val('f-email'))){e.textContent='THAT EMAIL DOESN\'T LOOK RIGHT';return}
+  if(cur===3 && !val('f-workflow')){e.textContent='ONE WORKFLOW IS ENOUGH TO START';return}
+  if(cur===4){submit();return}
+  cur++; show(cur);
+}
+function back(){if(cur>0){cur--;show(cur)}}
+function submit(){
+  var body = 'Name: '+val('f-name')+'\nCompany: '+val('f-company')+'\nEmail: '+val('f-email')+'\nWorkflow: '+val('f-workflow')+(val('f-notes')?'\n\nNotes:\n'+val('f-notes'):'');
+  var url = 'mailto:mesh@interlocklabs.ai?subject='+encodeURIComponent('Design partner intake: '+val('f-company'))+'&body='+encodeURIComponent(body);
+  cur = 5; show(5);
+  window.location.href = url;
+}
+document.addEventListener('keydown', function(ev){
+  if(ev.key!=='Enter') return;
+  var active = document.querySelector('.step.active');
+  if(!active) return;
+  var step = parseInt(active.getAttribute('data-step'));
+  if(step>=5) return;
+  if(step===4 && ev.shiftKey) return;
+  ev.preventDefault(); next();
+});
+show(0);
+</script>
+</body>
+</html>
