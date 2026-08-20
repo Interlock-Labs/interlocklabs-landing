@@ -47,6 +47,10 @@ input:focus,textarea:focus{border-bottom-color:var(--red)}
 footer{padding:18px 28px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 footer span, footer a{font-family:'IBM Plex Mono',monospace;font-size:.64rem;color:var(--dim);letter-spacing:.1em}
 .bar{position:fixed;top:0;left:0;height:2px;background:var(--red);transition:width .3s ease;z-index:10}
+.chips{display:flex;flex-wrap:wrap;gap:12px}
+.chip{font-family:'Instrument Sans',sans-serif;font-size:.98rem;font-weight:500;padding:.75rem 1.4rem;border:1.5px solid var(--ink);border-radius:999px;background:var(--paper);color:var(--ink);cursor:pointer}
+.chip:hover{background:#F2F2F2}
+.chip.sel{background:var(--ink);color:var(--paper)}
 </style>
 </head>
 <body>
@@ -92,8 +96,15 @@ footer span, footer a{font-family:'IBM Plex Mono',monospace;font-size:.64rem;col
   <div class="step" data-step="3">
     <div class="qn">04</div>
     <div class="q">Which workflow would you start the ledger on?</div>
-    <div class="hint">Lab review, intake, patient communications, documentation, or something else entirely.</div>
-    <input type="text" id="f-workflow" aria-label="Workflow">
+    <div class="hint">Pick one; you can always add more later.</div>
+    <div class="chips" role="group" aria-label="Workflow">
+      <button type="button" class="chip" onclick="pickWf(this,'Lab review')">Lab review</button>
+      <button type="button" class="chip" onclick="pickWf(this,'Intake')">Intake</button>
+      <button type="button" class="chip" onclick="pickWf(this,'Patient communications')">Patient communications</button>
+      <button type="button" class="chip" onclick="pickWf(this,'Clinical documentation')">Clinical documentation</button>
+      <button type="button" class="chip" onclick="pickWf(this,'OTHER')">Something else</button>
+    </div>
+    <input type="text" id="f-workflow-other" aria-label="Describe your workflow" placeholder="Tell us the workflow" style="display:none;margin-top:18px;font-size:1.2rem">
     <div class="err" id="e-3"></div>
     <div class="controls"><button class="btn" onclick="next()">Next</button><span class="keyhint">press <b>Enter</b></span><button class="back" onclick="back()">&larr; BACK</button></div>
   </div>
@@ -122,32 +133,50 @@ footer span, footer a{font-family:'IBM Plex Mono',monospace;font-size:.64rem;col
 </footer>
 
 <script>
-var cur = 0, total = 5;
+var cur = 0, total = 5, sending = false, wfChoice = '';
+function pickWf(el, v){
+  document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('sel')});
+  el.classList.add('sel');
+  wfChoice = v;
+  var other = document.getElementById('f-workflow-other');
+  if(v === 'OTHER'){ other.style.display='block'; setTimeout(function(){other.focus()},40); }
+  else { other.style.display='none'; document.getElementById('e-3').textContent=''; next(); }
+}
+function wfValue(){
+  if(wfChoice === 'OTHER'){ var t = val('f-workflow-other'); return t ? 'Other: ' + t : ''; }
+  return wfChoice;
+}
 function show(i){
   document.querySelectorAll('.step').forEach(function(s){s.classList.remove('active')});
   document.querySelector('[data-step="'+i+'"]').classList.add('active');
   document.getElementById('prog').textContent = (Math.min(i+1,total)) + ' / ' + total;
   document.getElementById('bar').style.width = (Math.min(i,total)/total*100) + '%';
-  var inp = document.querySelector('[data-step="'+i+'"] input, [data-step="'+i+'"] textarea');
-  if(inp) setTimeout(function(){inp.focus()}, 60);
+  var inp = document.querySelector('[data-step="'+i+'"] input:not([style*="display:none"]), [data-step="'+i+'"] textarea');
+  if(inp && inp.offsetParent !== null) setTimeout(function(){inp.focus()}, 60);
 }
 function val(id){var e=document.getElementById(id);return e?e.value.trim():''}
 function next(){
+  if(sending) return;
   var e = document.getElementById('e-'+cur); if(e) e.textContent='';
   if(cur===0 && !val('f-name')){e.textContent='YOUR NAME HELPS US SAY HELLO PROPERLY';return}
   if(cur===1 && !val('f-company')){e.textContent='COMPANY NAME, PLEASE';return}
   if(cur===2 && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val('f-email'))){e.textContent='THAT EMAIL DOESN\'T LOOK RIGHT';return}
-  if(cur===3 && !val('f-workflow')){e.textContent='ONE WORKFLOW IS ENOUGH TO START';return}
+  if(cur===3 && !wfValue()){e.textContent = (wfChoice==='OTHER') ? 'TELL US THE WORKFLOW IN A FEW WORDS' : 'PICK ONE WORKFLOW TO START';return}
   if(cur===4){submit();return}
   cur++; show(cur);
 }
 function back(){if(cur>0){cur--;show(cur)}}
 function submit(){
-  var payload = {name:val('f-name'),company:val('f-company'),email:val('f-email'),workflow:val('f-workflow'),notes:val('f-notes'),website:val('f-website')};
+  if(sending) return;
+  sending = true;
+  var payload = {name:val('f-name'),company:val('f-company'),email:val('f-email'),workflow:wfValue(),notes:val('f-notes'),website:val('f-website')};
   var btn = document.querySelector('[data-step="4"] .btn'); btn.disabled = true; btn.textContent = 'Sending...';
+  var backBtn = document.querySelector('[data-step="4"] .back'); if(backBtn) backBtn.disabled = true;
   fetch('https://lmmsrs1qdh.execute-api.us-east-2.amazonaws.com', {method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)})
     .then(function(r){ if(!r.ok) throw new Error('bad status'); cur = 5; show(5); })
     .catch(function(){
+      sending = false;
+      if(backBtn) backBtn.disabled = false;
       var body = 'Name: '+payload.name+'\nCompany: '+payload.company+'\nEmail: '+payload.email+'\nWorkflow: '+payload.workflow+(payload.notes?'\n\nNotes:\n'+payload.notes:'');
       document.getElementById('donetext').textContent = "Our form service didn't respond, so your email app has opened with your answers instead. Press send there and we'll get back to you.";
       cur = 5; show(5);
@@ -155,6 +184,8 @@ function submit(){
     });
 }
 document.addEventListener('keydown', function(ev){
+  if(ev.target && ev.target.closest && (ev.target.closest('button.back') || ev.target.closest('button.chip'))) return;
+  if(sending) return;
   if(ev.key!=='Enter') return;
   var active = document.querySelector('.step.active');
   if(!active) return;
