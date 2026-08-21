@@ -91,13 +91,27 @@ footer{background:var(--ink);color:rgba(255,255,255,.78);border-top:1px solid rg
 .foot .logo-word{color:var(--white);font-size:.85rem}
 .foot .pillars{font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.12em}
 
+.mob-art{display:none}
+.m-askers{display:none}
+.m-askers .mw{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.1em;font-weight:600}
+.m-askers .mc{font-family:'Newsreader',serif;font-size:1.05rem;color:#3D3D3D;margin-top:2px}
 @media(max-width:820px){
-  .hero{padding-top:40px;padding-bottom:48px}
+  .hero{padding-top:36px;padding-bottom:44px}
+  .desk-art{display:none !important}
+  .mob-art{display:flex;justify-content:flex-start}
+  .fan-desk{display:none}
+  .m-askers{display:flex;flex-direction:column;gap:.9rem;border-top:1px solid #E4E4E2;padding-top:1.1rem}
+  .hero .aud{font-size:.6rem;letter-spacing:.05em}
   .hero-grid{grid-template-columns:1fr;gap:2rem}
   .arg-grid{grid-template-columns:1fr;gap:2rem}
   .argument{padding:70px 28px}
 
   .beats{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .beats{grid-template-columns:1fr}
+  .beat{border-right:none;border-bottom:1px solid rgba(255,255,255,.85)}
+  .beat:last-child{border-bottom:none}
   .beat{border-bottom:1px solid rgba(255,255,255,.85);border-right:none}
   .beat:nth-child(2n+1){border-right:1px solid rgba(255,255,255,.85)}
   .beat:nth-last-child(-n+2){border-bottom:none}
@@ -125,7 +139,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.78);border-top:1px solid rg
   <!--email_off--><a class="btn" href="/intake/">Talk to us</a><!--/email_off-->
   <p class="aud">Built for healthcare teams automating decisions</p>
 </div>
-  <div style="display:flex;justify-content:center"><svg width="760" height="300" viewBox="0 0 760 300" aria-hidden="true">
+  <div class="desk-art" style="display:flex;justify-content:center"><svg style="max-width:100%;height:auto" width="760" height="300" viewBox="0 0 760 300" aria-hidden="true">
     <path d="M60 60 C 160 80, 230 130, 320 146" stroke="#0A0A0A" stroke-width="1.2" fill="none"></path>
     <path d="M66 150 C 170 150, 240 150, 320 150" stroke="#0A0A0A" stroke-width="1.2" fill="none"></path>
     <path d="M76 244 C 175 226, 240 176, 322 156" stroke="#0A0A0A" stroke-width="1.2" fill="none"></path>
@@ -153,6 +167,36 @@ footer{background:var(--ink);color:rgba(255,255,255,.78);border-top:1px solid rg
     <line x1="470" y1="208" x2="684" y2="208" stroke="#0A0A0A" stroke-width="1"></line>
     <text x="470" y="228" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#0A0A0A"><tspan fill="#B03A2E">0415</tspan>  a person decided</text>
   </svg></div>
+  <div class="mob-art">
+  <svg width="330" height="400" viewBox="0 0 330 400" aria-hidden="true" style="max-width:100%;height:auto">
+    <rect x="8" y="18" width="88" height="30" rx="6" fill="none" stroke="#6E6E6E" stroke-width="1.2"></rect>
+    <text x="52" y="37" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#3D3D3D">lab review</text>
+    <rect x="121" y="18" width="88" height="30" rx="6" fill="none" stroke="#6E6E6E" stroke-width="1.2"></rect>
+    <text x="165" y="37" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#3D3D3D">intake</text>
+    <rect x="234" y="18" width="88" height="30" rx="6" fill="none" stroke="#6E6E6E" stroke-width="1.2"></rect>
+    <text x="278" y="37" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#3D3D3D">documentation</text>
+    <path d="M52 48 C 52 80, 140 92, 158 108" stroke="#0A0A0A" stroke-width="1.1" fill="none"></path>
+    <path d="M165 48 L 165 106" stroke="#0A0A0A" stroke-width="1.1" fill="none"></path>
+    <path d="M278 48 C 278 80, 190 92, 172 108" stroke="#0A0A0A" stroke-width="1.1" fill="none"></path>
+    <rect x="139" y="110" width="52" height="52" rx="10" fill="#0A0A0A"></rect>
+    <rect x="149" y="120" width="13" height="13" rx="3" fill="#FFFFFF"></rect>
+    <rect x="168" y="120" width="13" height="13" rx="3" fill="none" stroke="#FFFFFF" stroke-width="1.4"></rect>
+    <rect x="149" y="139" width="13" height="13" rx="3" fill="none" stroke="#FFFFFF" stroke-width="1.4"></rect>
+    <rect x="168" y="139" width="13" height="13" rx="3" fill="#FFFFFF"></rect>
+    <line x1="165" y1="162" x2="165" y2="196" stroke="#0A0A0A" stroke-width="1.2"></line>
+    <path d="M165 196 L 161 189 M165 196 L 169 189" stroke="#0A0A0A" stroke-width="1.2" fill="none"></path>
+    <rect x="45" y="200" width="240" height="176" rx="8" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="1.5"></rect>
+    <text x="65" y="230" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#0A0A0A" font-weight="600">THE LEDGER</text>
+    <line x1="65" y1="244" x2="265" y2="244" stroke="#0A0A0A" stroke-width="1"></line>
+    <text x="65" y="268" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#3D3D3D"><tspan fill="#B03A2E">0412</tspan>  what came in</text>
+    <line x1="65" y1="278" x2="265" y2="278" stroke="#E2E2E2" stroke-width="1"></line>
+    <text x="65" y="300" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#3D3D3D"><tspan fill="#B03A2E">0413</tspan>  which rules applied</text>
+    <line x1="65" y1="310" x2="265" y2="310" stroke="#E2E2E2" stroke-width="1"></line>
+    <text x="65" y="332" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#3D3D3D"><tspan fill="#B03A2E">0414</tspan>  automation proceeded</text>
+    <line x1="65" y1="342" x2="265" y2="342" stroke="#E2E2E2" stroke-width="1"></line>
+    <text x="65" y="364" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#3D3D3D"><tspan fill="#B03A2E">0415</tspan>  a person decided</text>
+  </svg>
+</div>
   </div>
 </header>
 
@@ -165,10 +209,12 @@ footer{background:var(--ink);color:rgba(255,255,255,.78);border-top:1px solid rg
       <h2>If a person still has to check every AI decision, you're not really automating.</h2>
       <p class="para">Your workflows read labs, triage intake, draft messages, write documentation.</p>
       <p class="subhead">Every decision answers to someone.</p>
+    <div class="m-askers">
+      <div><div class="mw">YOUR CLINICAL TEAM</div><div class="mc">deciding what no longer needs review</div></div>
       <p class="para">Each receives the same answer: every decision checked against your rules, with a record of which stayed within them and which needed a person.</p>
       <p class="brandline">MEASURED RISK GETS COVERED. <span class="b">COVERED RISK GETS DEPLOYED.</span></p>
     </div>
-    <div style="overflow-x:auto"><svg width="640" height="560" viewBox="0 0 1024 560" preserveAspectRatio="xMinYMid meet" aria-hidden="true" style="max-width:100%;height:auto">
+    <div class="fan-desk" style="overflow-x:auto"><svg width="640" height="560" viewBox="0 0 1024 560" preserveAspectRatio="xMinYMid meet" aria-hidden="true" style="max-width:100%;height:auto">
       <rect x="16" y="180" width="236" height="200" rx="8" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="1.6"></rect>
       <text x="36" y="212" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="#0A0A0A" font-weight="600">THE LEDGER</text>
       <line x1="36" y1="228" x2="232" y2="228" stroke="#0A0A0A" stroke-width="1.1"></line>
@@ -195,6 +241,11 @@ footer{background:var(--ink);color:rgba(255,255,255,.78);border-top:1px solid rg
       <text x="412" y="496" font-family="IBM Plex Mono, monospace" font-size="11.5" letter-spacing="1.5" fill="#0A0A0A" font-weight="600">YOUR INSURER</text>
       <text x="412" y="520" font-family="Newsreader, serif" font-size="17" fill="#3D3D3D">when it's time to price the risk</text>
     </svg></div>
+      <div><div class="mw">YOUR COUNSEL</div><div class="mc">after something goes wrong</div></div>
+      <div><div class="mw">A CUSTOMER'S RISK TEAM</div><div class="mc">before the contract closes</div></div>
+      <div><div class="mw">A REGULATOR</div><div class="mc">after a complaint</div></div>
+      <div><div class="mw">YOUR INSURER</div><div class="mc">when it's time to price the risk</div></div>
+    </div>
   </div>
 </section></div>
 
