@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Interlock | The evidence ledger for AI decisions</title>
-<meta name="description" content="Interlock replays your AI's decisions against your own rules and records every one. The ledger that answers whoever asks.">
+<meta name="description" content="Interlock creates the independent evidence that lets you automate expert work and keep the risk covered.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://interlocklabs.ai/">
 <meta property="og:title" content="Interlock | The evidence ledger for AI decisions">
-<meta property="og:description" content="Interlock replays your AI's decisions against your own rules and records every one. The ledger that answers whoever asks.">
+<meta property="og:description" content="Interlock creates the independent evidence that lets you automate expert work and keep the risk covered.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://interlocklabs.ai/">
 <meta property="og:image" content="https://interlocklabs.ai/og-image.png">
@@ -16,7 +16,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Interlock | The evidence ledger for AI decisions">
-<meta name="twitter:description" content="Interlock replays your AI's decisions against your own rules and records every one. The ledger that answers whoever asks.">
+<meta name="twitter:description" content="Interlock creates the independent evidence that lets you automate expert work and keep the risk covered.">
 <meta name="twitter:image" content="https://interlocklabs.ai/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,12 +40,13 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 em.u{font-style:italic}
 .rotline{font-family:'Newsreader',serif;font-style:italic;font-size:clamp(1.3rem,2.4vw,2rem);line-height:1.2;margin:-0.6rem auto 1.6rem;max-width:820px}
 .rotator{display:inline-grid;vertical-align:bottom;justify-items:center;color:inherit}
-.rotator span{grid-area:1/1;opacity:0;animation:rot 8s infinite}
+.rotator span{grid-area:1/1;opacity:0;animation:rot 10s infinite}
 .rotator span:nth-child(1){animation-delay:0s}
 .rotator span:nth-child(2){animation-delay:2s}
 .rotator span:nth-child(3){animation-delay:4s}
 .rotator span:nth-child(4){animation-delay:6s}
-@keyframes rot{0%{opacity:0;transform:translateY(6px)}4%,22%{opacity:1;transform:translateY(0)}27%,100%{opacity:0;transform:translateY(-6px)}}
+.rotator span:nth-child(5){animation-delay:8s}
+@keyframes rot{0%{opacity:0;transform:translateY(6px)}3.2%,17.6%{opacity:1;transform:translateY(0)}21.6%,100%{opacity:0;transform:translateY(-6px)}}
 @media(prefers-reduced-motion:reduce){.rotator span{animation:none}.rotator span:nth-child(1){opacity:1}}
 
 nav{display:flex;align-items:center;justify-content:space-between;max-width:1080px;margin:0 auto;padding:22px 28px}
@@ -110,10 +111,10 @@ footer{background:var(--ink);color:rgba(255,255,255,.78);border-top:1px solid rg
 
 <header class="hero">
   <h1>Your AI makes decisions.<br>We keep the <em class="u">record</em>.</h1>
-  <div class="rotline"><span class="rotator"><span>for <i style="color:#B03A2E;font-style:italic">regulators.</i></span><span>for <i style="color:#B03A2E;font-style:italic">insurers.</i></span><span>for <i style="color:#B03A2E;font-style:italic">compliance.</i></span><span>for <i style="color:#B03A2E;font-style:italic">legal.</i></span></span></div>
-  <p class="sub">Interlock replays your automated workflow's decisions against your own rules and records every one: what came in, which rules applied, where automation proceeded, where a person stepped in.</p>
+  <div class="rotline"><span class="rotator"><span>for <i style="color:#B03A2E;font-style:italic">clinical.</i></span><span>for <i style="color:#B03A2E;font-style:italic">legal.</i></span><span>for <i style="color:#B03A2E;font-style:italic">regulators.</i></span><span>for <i style="color:#B03A2E;font-style:italic">insurers.</i></span><span>for <i style="color:#B03A2E;font-style:italic">compliance.</i></span></span></div>
+  <p class="sub">Interlock creates the independent evidence that lets you automate expert work and keep the risk covered.</p>
   <!--email_off--><a class="btn" href="/intake/">Talk to us</a><!--/email_off-->
-  <p class="aud">Built for healthcare AI</p>
+  <p class="aud">Built for healthcare teams automating decisions</p>
 </header>
 
 <div class="ledger-art">
@@ -151,15 +152,15 @@ footer{background:var(--ink);color:rgba(255,255,255,.78);border-top:1px solid rg
   <div class="wrap" style="padding:0">
     <span class="label">Why a ledger</span>
     <h2>Every decision answers to someone.</h2>
-    <p class="para">Your automated workflows read labs, triage intake, draft patient messages, write clinical documentation. Each of those decisions has someone who may ask what was done, and against what standard.</p>
+    <p class="para">If a person still has to check every AI decision, you're not really automating. Your workflows read labs, triage intake, draft patient messages, write clinical documentation, and each of those decisions has someone who may ask what was done, and against what standard.</p>
     <div class="askers">
-      <div class="ask"><span class="who">Your clinical lead</span><p>deciding what still needs review.</p></div>
+      <div class="ask"><span class="who">Your clinical team</span><p>deciding what no longer needs review.</p></div>
       <div class="ask"><span class="who">Your counsel</span><p>after something goes wrong.</p></div>
       <div class="ask"><span class="who">A customer's risk team</span><p>before the contract closes.</p></div>
       <div class="ask"><span class="who">A regulator</span><p>after a complaint.</p></div>
       <div class="ask"><span class="who">Your insurer</span><p>when it's time to price the risk.</p></div>
     </div>
-    <p class="para">Each of them receives the same answer: the ledger. It shows where automation carried the workflow and where your people made the decisions. You decide who decides; the ledger records it.</p>
+    <p class="para">Each of them receives the same answer: the ledger. Interlock checks each AI decision against your rules, shows which stayed within them and which needed a person, and keeps the record of what happened. You decide who decides; the ledger records it.</p>
     <p class="brandline">MEASURED RISK GETS COVERED. <span class="b">COVERED RISK GETS DEPLOYED.</span></p>
   </div>
 </section>
@@ -169,11 +170,12 @@ footer{background:var(--ink);color:rgba(255,255,255,.78);border-top:1px solid rg
     <h2>Start the ledger on one workflow.</h2>
     <div class="beats">
       <div class="beat"><p>One workflow.</p></div>
+      <div class="beat"><p>Your rules.</p></div>
       <div class="beat"><p>Your historical data.</p></div>
-      <div class="beat"><p>Results in weeks.</p></div>
       <div class="beat"><p>Nothing touches production.</p></div>
     </div>
     <!--email_off--><a class="btn" href="/intake/">Talk to us</a><!--/email_off-->
+    <p class="micro">RESULTS IN WEEKS</p>
   </div>
 </div>
 
@@ -183,7 +185,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.78);border-top:1px solid rg
       <svg width="20" height="20" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="7" fill="#0A0A0A"/><rect x="0.6" y="0.6" width="32.8" height="32.8" rx="8" fill="none" stroke="#FFFFFF" stroke-width="1.2"/><rect x="6" y="6" width="10" height="10" rx="2" fill="#FFFFFF"/><rect x="18" y="6" width="10" height="10" rx="2" fill="none" stroke="#FFFFFF" stroke-width="1.5"/><rect x="6" y="18" width="10" height="10" rx="2" fill="none" stroke="#FFFFFF" stroke-width="1.5"/><rect x="18" y="18" width="10" height="10" rx="2" fill="#FFFFFF"/></svg>
       <span class="logo-word">INTERLOCK LABS</span>
     </div>
-    <div class="pillars">THE EVIDENCE LEDGER FOR AI DECISIONS</div>
+    <div class="pillars">THE INDEPENDENT EVIDENCE LEDGER FOR AI DECISIONS</div>
     <div style="font-size:.82rem"><a href="https://www.linkedin.com/company/interlocklabs-ai/" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:underline;text-underline-offset:3px">Follow our thinking &rarr;</a></div>
     <div style="font-size:.8rem">&copy; 2026 Interlock Labs</div>
   </div>
