@@ -233,17 +233,6 @@
       border: 1px solid var(--ink);
       background: var(--soft);
     }
-    .ledger-stage::after {
-      content: "INDEPENDENT EVIDENCE";
-      position: absolute;
-      top: 0;
-      right: 10px;
-      writing-mode: vertical-rl;
-      font-family: var(--mono);
-      font-size: .58rem;
-      letter-spacing: .16em;
-      color: var(--dim);
-    }
     .ledger-card {
       position: relative;
       z-index: 1;
@@ -430,7 +419,6 @@
       .hero-note { line-height: 1.6; }
       .ledger-stage { padding: 16px 16px 25px 0; }
       .ledger-stage::before { inset: 0 0 10px 16px; }
-      .ledger-stage::after { display: none; }
       .ledger-card { box-shadow: 10px 12px 0 rgba(10,10,10,.1); }
       .ledger-card::before { left: 38px; }
       .ledger-head { padding: 20px 16px 17px 54px; }
