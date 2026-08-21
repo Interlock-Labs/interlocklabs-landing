@@ -95,18 +95,18 @@ footer span, footer a{font-family:'IBM Plex Mono',monospace;font-size:.64rem;col
 
   <div class="step" data-step="3">
     <div class="qn">04</div>
-    <div class="q">Which workflow would you start the ledger on?</div>
-    <div class="hint">Pick one; you can always add more later.</div>
-    <div class="chips" role="group" aria-label="Workflow">
-      <button type="button" class="chip" onclick="pickWf(this,'Review &amp; approval')">Review &amp; approval</button>
-      <button type="button" class="chip" onclick="pickWf(this,'Intake &amp; triage')">Intake &amp; triage</button>
-      <button type="button" class="chip" onclick="pickWf(this,'Patient communications')">Patient communications</button>
-      <button type="button" class="chip" onclick="pickWf(this,'Documentation &amp; admin')">Documentation &amp; admin</button>
-      <button type="button" class="chip" onclick="pickWf(this,'OTHER')">Something else</button>
+    <div class="q">Which workflows would you start with?</div>
+    <div class="hint">Select all that apply.</div>
+    <div class="chips" role="group" aria-label="Workflows">
+      <button type="button" class="chip" aria-pressed="false" onclick="pickWf(this,'Review &amp; approval')">Review &amp; approval</button>
+      <button type="button" class="chip" aria-pressed="false" onclick="pickWf(this,'Intake &amp; triage')">Intake &amp; triage</button>
+      <button type="button" class="chip" aria-pressed="false" onclick="pickWf(this,'Patient communications')">Patient communications</button>
+      <button type="button" class="chip" aria-pressed="false" onclick="pickWf(this,'Documentation &amp; admin')">Documentation &amp; admin</button>
+      <button type="button" class="chip" aria-pressed="false" onclick="pickWf(this,'OTHER')">Something else</button>
     </div>
     <input type="text" id="f-workflow-other" aria-label="Describe your workflow" placeholder="Tell us the workflow" style="display:none;margin-top:18px;font-size:1.2rem">
     <div class="err" id="e-3"></div>
-    <div class="controls"><button class="btn" onclick="next()">Next</button><span class="keyhint">press <b>Enter</b></span><button class="back" onclick="back()">&larr; BACK</button></div>
+    <div class="controls"><button class="btn" onclick="next()">Next</button><button class="back" onclick="back()">&larr; BACK</button></div>
   </div>
 
   <div class="step" data-step="4">
@@ -128,23 +128,39 @@ footer span, footer a{font-family:'IBM Plex Mono',monospace;font-size:.64rem;col
 </main>
 
 <footer>
-  <span>INTERLOCK LABS &middot; THE EVIDENCE LEDGER FOR AI DECISIONS</span>
+  <span>INTERLOCK LABS &middot; INDEPENDENT RECORDS FOR AI DECISIONS</span>
   <a href="https://www.linkedin.com/company/interlocklabs-ai/" target="_blank" rel="noopener" style="text-decoration:underline">FOLLOW OUR THINKING</a>
 </footer>
 
 <script>
-var cur = 0, total = 5, sending = false, wfChoice = '';
+var cur = 0, total = 5, sending = false, wfChoices = [];
 function pickWf(el, v){
-  document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('sel')});
-  el.classList.add('sel');
-  wfChoice = v;
+  var i = wfChoices.indexOf(v);
+  if(i >= 0){
+    wfChoices.splice(i, 1);
+    el.classList.remove('sel');
+    el.setAttribute('aria-pressed', 'false');
+  } else {
+    wfChoices.push(v);
+    el.classList.add('sel');
+    el.setAttribute('aria-pressed', 'true');
+  }
   var other = document.getElementById('f-workflow-other');
-  if(v === 'OTHER'){ other.style.display='block'; setTimeout(function(){other.focus()},40); }
-  else { other.style.display='none'; document.getElementById('e-3').textContent=''; next(); }
+  if(wfChoices.indexOf('OTHER') >= 0){
+    other.style.display='block';
+    if(v === 'OTHER' && i < 0) setTimeout(function(){other.focus()},40);
+  } else {
+    other.style.display='none';
+  }
+  document.getElementById('e-3').textContent='';
 }
 function wfValue(){
-  if(wfChoice === 'OTHER'){ var t = val('f-workflow-other'); return t ? 'Other: ' + t : ''; }
-  return wfChoice;
+  var values = wfChoices.filter(function(v){return v !== 'OTHER'});
+  if(wfChoices.indexOf('OTHER') >= 0){
+    var t = val('f-workflow-other');
+    if(t) values.push('Other: ' + t);
+  }
+  return values.join(', ');
 }
 function show(i){
   document.querySelectorAll('.step').forEach(function(s){s.classList.remove('active')});
@@ -161,7 +177,8 @@ function next(){
   if(cur===0 && !val('f-name')){e.textContent='YOUR NAME HELPS US SAY HELLO PROPERLY';return}
   if(cur===1 && !val('f-company')){e.textContent='COMPANY NAME, PLEASE';return}
   if(cur===2 && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val('f-email'))){e.textContent='THAT EMAIL DOESN\'T LOOK RIGHT';return}
-  if(cur===3 && !wfValue()){e.textContent = (wfChoice==='OTHER') ? 'TELL US THE WORKFLOW IN A FEW WORDS' : 'PICK ONE WORKFLOW TO START';return}
+  if(cur===3 && !wfChoices.length){e.textContent='SELECT AT LEAST ONE WORKFLOW';return}
+  if(cur===3 && wfChoices.indexOf('OTHER') >= 0 && !val('f-workflow-other')){e.textContent='TELL US THE OTHER WORKFLOW IN A FEW WORDS';return}
   if(cur===4){submit();return}
   cur++; show(cur);
 }
@@ -180,7 +197,7 @@ function submit(){
       var body = 'Name: '+payload.name+'\nCompany: '+payload.company+'\nEmail: '+payload.email+'\nWorkflow: '+payload.workflow+(payload.notes?'\n\nNotes:\n'+payload.notes:'');
       document.getElementById('donetext').textContent = "Our form service didn't respond, so your email app has opened with your answers instead. Press send there and we'll get back to you.";
       cur = 5; show(5);
-      window.location.href = 'mailto:mesh@interlocklabs.ai?subject='+encodeURIComponent('Design partner intake: '+payload.company)+'&body='+encodeURIComponent(body);
+      window.location.href = 'mailto:mesh@interlocklabs.ai?subject='+encodeURIComponent('Interlock intake: '+payload.company)+'&body='+encodeURIComponent(body);
     });
 }
 document.addEventListener('keydown', function(ev){
