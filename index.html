@@ -294,15 +294,22 @@
     .live-dot::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--red); }
 
     .section { padding: 116px 0; }
-    .section-head { display: grid; grid-template-columns: .7fr 1.3fr; gap: 80px; margin-bottom: 66px; }
+    .section-head { margin-bottom: 66px; }
+    .section-head > .eyebrow { display: block; margin-bottom: 24px; }
+    .section-lead {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(320px, .6fr);
+      gap: 64px;
+      align-items: end;
+    }
     .section h2 {
-      max-width: 800px;
+      max-width: 860px;
       margin: 0;
       font-size: clamp(2.35rem, 4.7vw, 4.5rem);
       line-height: 1.01;
       letter-spacing: -.035em;
     }
-    .section-intro { max-width: 600px; margin: 24px 0 0; color: var(--dim); font-size: 1.08rem; line-height: 1.7; }
+    .section-intro { max-width: 460px; margin: 0; color: var(--dim); font-size: clamp(1.12rem, 1.35vw, 1.25rem); line-height: 1.6; }
 
     .problem-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 0; border: 1px solid var(--ink); }
     .problem-copy { padding: clamp(30px, 5vw, 64px); border-right: 1px solid var(--ink); }
@@ -382,7 +389,9 @@
       .hero-grid { grid-template-columns: 1fr; gap: 64px; }
       .hero-copy { max-width: 680px; }
       .ledger-stage { width: min(620px, 100%); }
-      .section-head, .asker-layout, .closing-grid { grid-template-columns: 1fr; gap: 42px; }
+      .section-lead { grid-template-columns: 1fr; gap: 28px; }
+      .section-intro { max-width: 720px; }
+      .asker-layout, .closing-grid { grid-template-columns: 1fr; gap: 42px; }
       .problem-grid { grid-template-columns: 1fr; }
       .problem-copy { border-right: 0; border-bottom: 1px solid var(--ink); }
       .asker-copy { position: static; }
@@ -418,7 +427,9 @@
       .ledger-foot { padding: 16px 14px 16px 54px; flex-direction: column; gap: 6px; }
       .section { padding-top: 82px; padding-bottom: 82px; }
       .section-head { margin-bottom: 44px; }
+      .section-head > .eyebrow { margin-bottom: 18px; }
       .section h2 { font-size: clamp(2.4rem, 12vw, 3.4rem); }
+      .section-intro { font-size: 1.08rem; line-height: 1.65; }
       .problem-copy { padding: 34px 26px; }
       .workflow-item { grid-template-columns: 48px 1fr; }
       .asker-layout { gap: 40px; }
@@ -523,22 +534,22 @@
       <div class="container">
         <div class="section-head">
           <span class="eyebrow red">Why a ledger</span>
-          <div>
-            <h2 id="why-title">If a person still has to check every AI decision, you’re not really automating.</h2>
-            <p class="section-intro">We verify AI decision workflows and build the audit trail that makes them insurable. Using historical decisions, Interlock checks each case against your rules and writes the result per decision.</p>
+          <div class="section-lead">
+            <h2 id="why-title">If every AI decision still requires human review, the workflow is not fully automated.</h2>
+            <p class="section-intro">We verify AI decision workflows and build the audit trail that makes them insurable. Interlock checks historical cases against your rules and records the result for each decision.</p>
           </div>
         </div>
 
         <div class="problem-grid">
           <div class="problem-copy">
-            <blockquote>Your reviewers shouldn’t have to reconstruct an AI decision from scattered logs after the fact.</blockquote>
-            <p>The ledger keeps the evidence with the decision: the input, governing rule, workflow version, and recorded outcome.</p>
+            <blockquote>A decision record should stand on its own, without reconstruction from scattered logs.</blockquote>
+            <p>The ledger keeps the evidence with the decision: input, governing rule, workflow version, and recorded outcome.</p>
           </div>
           <div class="workflow-list" aria-label="How Interlock works">
-            <div class="workflow-item"><span class="workflow-no">01</span><div class="workflow-text"><strong>Scope the workflow</strong><span>Choose one bounded, repeatable decision process.</span></div></div>
-            <div class="workflow-item"><span class="workflow-no">02</span><div class="workflow-text"><strong>Apply your rules</strong><span>Your experts define the ground truth. Interlock keeps the machinery.</span></div></div>
-            <div class="workflow-item"><span class="workflow-no">03</span><div class="workflow-text"><strong>Replay real decisions</strong><span>Historical cases show where the workflow stays within bounds.</span></div></div>
-            <div class="workflow-item"><span class="workflow-no">04</span><div class="workflow-text"><strong>Write the record</strong><span>Every decision produces evidence another team can inspect.</span></div></div>
+            <div class="workflow-item"><span class="workflow-no">01</span><div class="workflow-text"><strong>Scope the workflow</strong><span>Select one bounded, repeatable decision process.</span></div></div>
+            <div class="workflow-item"><span class="workflow-no">02</span><div class="workflow-text"><strong>Apply your rules</strong><span>Your experts define the ground truth; Interlock checks each case against it.</span></div></div>
+            <div class="workflow-item"><span class="workflow-no">03</span><div class="workflow-text"><strong>Replay historical cases</strong><span>Run past decisions through the same rules and workflow version.</span></div></div>
+            <div class="workflow-item"><span class="workflow-no">04</span><div class="workflow-text"><strong>Write the record</strong><span>Record the evidence and outcome for every decision.</span></div></div>
           </div>
         </div>
       </div>
