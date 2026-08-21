@@ -205,6 +205,7 @@
       font-size: clamp(1.05rem, 1.7vw, 1.23rem);
       line-height: 1.62;
     }
+    .hero-definition { display: block; margin-top: 10px; color: var(--ink); }
     .hero-actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
     .hero-note {
       margin: 30px 0 0;
@@ -411,8 +412,10 @@
       .hero { padding: 58px 0 52px; }
       .hero h1 { font-size: clamp(3rem, 14vw, 4.25rem); }
       .hero-grid { gap: 48px; }
-      .hero-actions { gap: 16px; }
-      .hero-note { line-height: 1.6; }
+      .hero-actions { width: 100%; flex-direction: column; align-items: center; gap: 12px; }
+      .hero-actions .button { width: min(100%, 300px); min-height: 60px; font-size: 1rem; }
+      .hero-actions .text-link { justify-content: center; }
+      .hero-note { line-height: 1.6; text-align: center; }
       .ledger-stage { padding: 16px 16px 25px 0; }
       .ledger-stage::before { inset: 0 0 10px 16px; }
       .ledger-card { box-shadow: 10px 12px 0 rgba(10,10,10,.1); }
@@ -442,6 +445,8 @@
       .closing { padding: 74px 0; }
       .closing-grid { gap: 38px; }
       .closing h2 { font-size: clamp(2.65rem, 13vw, 4rem); }
+      .closing-action { width: 100%; justify-self: stretch; }
+      .closing-action .button { width: 100%; min-height: 64px; font-size: 1.05rem; }
       .footer-grid { grid-template-columns: 1fr; padding: 34px 0; }
       .footer-line { grid-column: auto; grid-row: auto; padding: 0; }
       .footer-end { flex-wrap: wrap; gap: 14px 22px; }
@@ -487,7 +492,7 @@
             </span>
             <span class="sr-only">For clinical, legal, regulatory, insurance, and compliance teams.</span>
           </p>
-          <p class="hero-copy">Interlock creates the independent evidence that lets you automate expert work and keep the risk covered.</p>
+          <p class="hero-copy">Interlock creates the independent evidence that lets you automate expert work and keep the risk covered.<span class="hero-definition">The ledger is a record of every AI decision: what came in, which rules applied, what happened, and where a person stepped in.</span></p>
           <div class="hero-actions">
             <a class="button" href="/intake/">Talk to us</a>
             <a class="text-link" href="#why">How the ledger works <span aria-hidden="true">→</span></a>
