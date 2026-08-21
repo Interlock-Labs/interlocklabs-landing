@@ -117,19 +117,7 @@
     }
     .brand { display: inline-flex; align-items: center; gap: 12px; width: max-content; }
     .brand-name { font-family: var(--mono); font-size: .9rem; font-weight: 600; letter-spacing: -.02em; }
-    .brand-mark {
-      display: grid;
-      grid-template-columns: repeat(2, 8px);
-      grid-template-rows: repeat(2, 8px);
-      gap: 4px;
-      width: 32px;
-      height: 32px;
-      padding: 6px;
-      border-radius: 7px;
-      background: var(--ink);
-    }
-    .brand-mark span { border: 1.4px solid var(--paper); border-radius: 2px; }
-    .brand-mark span:nth-child(1), .brand-mark span:nth-child(4) { background: var(--paper); }
+    .brand-logo { display: block; flex: 0 0 auto; }
     .nav-links { display: flex; align-items: center; gap: 28px; }
     .nav-links a {
       font-size: .78rem;
@@ -384,7 +372,6 @@
       gap: 32px;
       align-items: center;
     }
-    .site-footer .brand-mark { box-shadow: 0 0 0 1px var(--paper); }
     .footer-line { color: rgba(255,255,255,.72); font-family: var(--mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; }
     .footer-end { display: flex; align-items: center; gap: 26px; color: rgba(255,255,255,.7); font-size: .78rem; }
     .footer-end a { color: var(--paper); text-decoration: underline; text-underline-offset: 4px; }
@@ -410,7 +397,6 @@
       .nav { min-height: 68px; gap: 14px; }
       .brand { gap: 9px; }
       .brand-name { font-size: .72rem; }
-      .brand-mark { width: 28px; height: 28px; grid-template-columns: repeat(2, 7px); grid-template-rows: repeat(2, 7px); gap: 3px; padding: 5.5px; }
       .nav-action .button { min-height: 40px; padding: 8px 15px; font-size: .75rem; }
       .hero { padding: 58px 0 52px; }
       .hero h1 { font-size: clamp(3rem, 14vw, 4.25rem); }
@@ -464,7 +450,7 @@
   <header class="site-header">
     <nav class="nav container" aria-label="Primary navigation">
       <a class="brand" href="/" aria-label="Interlock Labs home">
-        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <svg class="brand-logo" width="28" height="28" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="7" fill="#0A0A0A"/><rect x="6" y="6" width="10" height="10" rx="2" fill="#FFFFFF"/><rect x="18" y="6" width="10" height="10" rx="2" fill="none" stroke="#FFFFFF" stroke-width="1.5"/><rect x="6" y="18" width="10" height="10" rx="2" fill="none" stroke="#FFFFFF" stroke-width="1.5"/><rect x="18" y="18" width="10" height="10" rx="2" fill="#FFFFFF"/></svg>
         <span class="brand-name">INTERLOCK LABS</span>
       </a>
       <div class="nav-links">
@@ -598,7 +584,7 @@
   <footer class="site-footer">
     <div class="footer-grid container">
       <a class="brand" href="/" aria-label="Interlock Labs home">
-        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <svg class="brand-logo" width="20" height="20" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="7" fill="#0A0A0A"/><rect x="0.6" y="0.6" width="32.8" height="32.8" rx="8" fill="none" stroke="#FFFFFF" stroke-width="1.2"/><rect x="6" y="6" width="10" height="10" rx="2" fill="#FFFFFF"/><rect x="18" y="6" width="10" height="10" rx="2" fill="none" stroke="#FFFFFF" stroke-width="1.5"/><rect x="6" y="18" width="10" height="10" rx="2" fill="none" stroke="#FFFFFF" stroke-width="1.5"/><rect x="18" y="18" width="10" height="10" rx="2" fill="#FFFFFF"/></svg>
         <span class="brand-name">INTERLOCK LABS</span>
       </a>
       <div class="footer-line">The independent evidence ledger for AI decisions</div>
